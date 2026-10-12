@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GCC Atlas — India Expansion Diligence Workspace</title>
+  <meta name="description" content="Defensible India location shortlist workspace for mid-market engineering & data capability hubs. Researched on 12 October 2026. Author: Andluru Sai Punith Reddy.">
+  <meta name="author" content="Andluru Sai Punith Reddy">
+
+  <!-- Google Fonts: Newsreader (Editorial Serif) & Plus Jakarta Sans (Clean Modern Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Accessible Skip Navigation -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Mobile Top Bar -->
+  <header class="mobile-top-bar" aria-label="Mobile Navigation Bar">
+    <div class="mobile-brand">
+      <span class="brand-logo-mark">G</span>
+      <span>GCC Atlas</span>
+    </div>
+    <button type="button" class="mobile-nav-toggle" id="mobile-nav-toggle" aria-expanded="false" aria-controls="app-sidebar" aria-label="Toggle navigation menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+      <span>Menu</span>
+    </button>
+  </header>
+
+  <div class="app-container">
+    <!-- Desktop Sidebar Navigation -->
+    <aside class="app-sidebar" id="app-sidebar" aria-label="Main Navigation">
+      <div class="sidebar-header">
+        <div class="brand-wrapper">
+          <div class="brand-title-row">
+            <span class="brand-logo-mark" aria-hidden="true">G</span>
+            <span class="brand-title">GCC Atlas</span>
+          </div>
+          <span class="brand-subtitle">India Expansion Diligence</span>
+          <span class="brand-author-tag">Flexiple Assignment • Andluru Sai Punith Reddy</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Application Sections">
+        <div class="nav-section-title">Diligence Modules</div>
+        
+        <button type="button" class="nav-item-btn active" data-view="explore" id="nav-btn-explore" aria-controls="view-explore" aria-current="page">
+          <span class="nav-item-label">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </span>
+            <span>1. Explore GCCs</span>
+          </span>
+          <span class="nav-pill-count" id="sidebar-explore-count">4</span>
+        </button>
+
+        <button type="button" class="nav-item-btn" data-view="compare" id="nav-btn-compare" aria-controls="view-compare">
+          <span class="nav-item-label">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+            </span>
+            <span>2. Compare cities</span>
+          </span>
+          <span class="nav-pill-count">3</span>
+        </button>
+
+        <button type="button" class="nav-item-btn" data-view="providers" id="nav-btn-providers" aria-controls="view-providers">
+          <span class="nav-item-label">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </span>
+            <span>3. Service providers</span>
+          </span>
+          <span class="nav-pill-count">2</span>
+        </button>
+
+        <button type="button" class="nav-item-btn" data-view="shortlist" id="nav-btn-shortlist" aria-controls="view-shortlist">
+          <span class="nav-item-label">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+            </span>
+            <span>4. My shortlist</span>
+          </span>
+          <span class="nav-pill-count" id="sidebar-shortlist-count">0</span>
+        </button>
+
+        <button type="button" class="nav-item-btn" data-view="methodology" id="nav-btn-methodology" aria-controls="view-methodology">
+          <span class="nav-item-label">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            </span>
+            <span>5. Methodology & Sources</span>
+          </span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button type="button" class="quick-tour-trigger" id="btn-open-tour">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          <span>90-Second Walkthrough</span>
+        </button>
+        <div>Curated Prototype • 12 Oct 2026</div>
+      </div>
+    </aside>
+
+    <!-- Main Content Application -->
+    <main class="app-main" id="main-content" tabindex="-1">
+      <!-- Top Global Banner -->
+      <header class="context-banner" aria-label="Dataset Context and Disclaimer">
+        <div class="context-banner-left">
+          <span class="context-tag">Curated Prototype</span>
+          <span>Researched on <strong>12 October 2026</strong> for 50–200 seat engineering/data expansions</span>
+        </div>
+        <div class="context-banner-right">
+          <span>Browser-local storage • Deterministic calculation</span>
+        </div>
+      </header>
+
+      <!-- Viewport -->
+      <div class="content-viewport">
+        <!-- ========================================== -->
+        <!-- VIEW 1: EXPLORE GCCs                       -->
+        <!-- ========================================== -->
+        <section id="view-explore" class="app-view-panel" aria-labelledby="heading-explore">
+          <div class="view-header">
+            <div class="view-meta-row">
+              <div class="view-title-group">
+                <h1 id="heading-explore">Explore GCC Footprints</h1>
+                <p class="view-lead">Inspect verified corporate claims, source links, and unresolved diligence questions across peer capability centres.</p>
+              </div>
+              <div class="prototype-notice-pill">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+                <span>Curated 4-record prototype • Researched 12 Oct 2026</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Search & Filter Controls -->
+          <div class="filter-toolbar" role="search" aria-label="Filter company records">
+            <div class="search-input-wrapper">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="search" id="explore-search" class="search-input" placeholder="Search company, parent, functions, or keywords (e.g., 'DBS', 'Retail', 'cloud')..." aria-label="Search companies by keyword">
+              <button type="button" id="explore-search-clear" class="search-clear-btn" aria-label="Clear search input" style="display: none;">&times;</button>
+            </div>
+
+            <div class="filter-row">
+              <div class="filter-selects-group">
+                <div class="filter-group">
+                  <label for="filter-city" class="filter-label">City:</label>
+                  <select id="filter-city" class="filter-select" aria-label="Filter by city">
+                    <option value="all">All Cities (3)</option>
+                    <option value="Bengaluru">Bengaluru</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Pune">Pune</option>
+                  </select>
+                </div>
+
+                <div class="filter-group">
+                  <label for="filter-sector" class="filter-label">Sector:</label>
+                  <select id="filter-sector" class="filter-select" aria-label="Filter by sector">
+                    <option value="all">All Sectors (2)</option>
+                    <option value="Retail">Retail</option>
+                    <option value="Financial services">Financial services</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="filter-status-info" id="explore-count-status" aria-live="polite">
+                Showing 4 of 4 records
+              </div>
+            </div>
+          </div>
+
+          <!-- Company Grid -->
+          <div class="companies-grid" id="explore-companies-container" aria-label="Curated Company Records">
+            <!-- Dynamically populated by js/app.js -->
+          </div>
+
+          <!-- Empty State (Hidden by default) -->
+          <div id="explore-empty-state" class="empty-state-box" style="display: none;">
+            <div class="empty-state-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </div>
+            <h3 class="serif-heading">No matching GCC records found</h3>
+            <p id="empty-state-explanation">No records matched your search query. Try removing filters or searching for "DBS" or "Retail".</p>
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-reset-filters">Reset Search & Filters</button>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- VIEW 2: COMPARE CITIES                     -->
+        <!-- ========================================== -->
+        <section id="view-compare" class="app-view-panel" aria-labelledby="heading-compare" style="display: none;">
+          <div class="view-header">
+            <div class="view-meta-row">
+              <div class="view-title-group">
+                <h1 id="heading-compare">Location Cost Scenario Model</h1>
+                <p class="view-lead">Compare annual salary and base office rent costs for a 50–200 seat team across Bengaluru, Hyderabad, and Pune.</p>
+              </div>
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-reset-assumptions">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v6h6"></path><path d="M21 12A9 9 0 0 0 6 5.3L3 8"></path><path d="M21 22v-6h-6"></path><path d="M3 12a9 9 0 0 0 15 6.7l3-2.7"></path></svg>
+                <span>Reset Assumptions</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="comparison-layout">
+            <!-- Scenario Inputs Panel (Left) -->
+            <aside class="scenario-inputs-panel" aria-label="Editable Cost Assumptions">
+              <div class="panel-header-row">
+                <h3 class="serif-heading">Scenario Assumptions</h3>
+                <span class="badge badge-analyst">Editable</span>
+              </div>
+
+              <div class="disclosure-callout" role="note">
+                <strong>ILLUSTRATIVE ASSUMPTIONS:</strong> All salary and rent defaults below are illustrative scenario inputs, not sourced benchmarks. Model covers <strong>annual base salary + base rent only</strong>. Excludes benefits, fit-out capex, tax, recruiting, and operations.
+              </div>
+
+              <!-- Shared Inputs -->
+              <div class="input-section-title">Shared Parameters</div>
+              
+              <div class="form-group">
+                <div class="form-label-row">
+                  <label for="input-employees" class="form-label">Team Headcount</label>
+                  <span class="form-hint">Target employees</span>
+                </div>
+                <div class="input-with-affix">
+                  <input type="number" id="input-employees" class="form-input" min="10" max="1000" step="5" value="100" aria-describedby="err-employees">
+                  <span class="affix-suffix">people</span>
+                </div>
+                <div id="err-employees" class="input-error-msg">Please enter a headcount between 10 and 1,000.</div>
+              </div>
+
+              <div class="form-group">
+                <div class="form-label-row">
+                  <label for="input-sqft" class="form-label">Space Per Employee</label>
+                  <span class="form-hint">Density standard</span>
+                </div>
+                <div class="input-with-affix">
+                  <input type="number" id="input-sqft" class="form-input" min="50" max="250" step="5" value="100" aria-describedby="err-sqft">
+                  <span class="affix-suffix">sq ft</span>
+                </div>
+                <div id="err-sqft" class="input-error-msg">Please enter space between 50 and 250 sq ft.</div>
+              </div>
+
+              <!-- City Specific Inputs -->
+              <div class="input-section-title">Bengaluru Assumptions</div>
+              <div class="form-group">
+                <div class="form-label-row">
+                  <label for="input-blr-salary" class="form-label">Annual Salary / Head</label>
+                </div>
+                <div class="input-with-affix">
+                  <span class="affix-prefix">₹</span>
+                  <input type="number" id="input-blr-salary" class="form-input" min="5" max="100" step="0.5" value="24">
+                  <span class="affix-suffix">Lakh/yr</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-label-row">
+                  <label for="input-blr-rent" class="form-label">Monthly Office Rent</label>
+                </div>
+                <div class="input-with-affix">
+                  <span class="affix-prefix">₹</span>
+                  <input type="number" id="input-blr-rent" class="form-input" min="20" max="300" step="1" value="100">
+                  <span class="affix-suffix">/sq ft/mo</span>
+                </div>
+              </div>
+
+              <div class="input-section-title">Hyderabad Assumptions</div>
+              <div class="form-group">
+                <div class="form-label-row">
+                  <label for="input-hyd-salary" class="form-label">Annual Salary / Head</label>
+                </div>
+                <div class="input-with-affix">
+                  <span class="affix-prefix">₹</span>
+                  <input type="number" id="input-hyd-salary" class="form-input" min="5" max="100" step="0.5" value="22">
+                  <span class="affix-suffix">Lakh/yr</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-label-row">
+                  <label for="input-hyd-rent" class="form-label">Monthly Office Rent</label>
+                </div>
+                <div class="input-with-affix">
+                  <span class="affix-prefix">₹</span>
+                  <input type="number" id="input-hyd-rent" class="form-input" min="20" max="300" step="1" value="80">
+                  <span class="affix-suffix">/sq ft/mo</span>
+                </div>
+              </div>
+
+              <div class="input-section-title">Pune Assumptions</div>
+              <div class="form-group">
+                <div class="form-label-row">
+                  <label for="input-pun-salary" class="form-label">Annual Salary / Head</label>
+                </div>
+                <div class="input-with-affix">
+                  <span class="affix-prefix">₹</span>
+                  <input type="number" id="input-pun-salary" class="form-input" min="5" max="100" step="0.5" value="21">
+                  <span class="affix-suffix">Lakh/yr</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-label-row">
+                  <label for="input-pun-rent" class="form-label">Monthly Office Rent</label>
+                </div>
+                <div class="input-with-affix">
+                  <span class="affix-prefix">₹</span>
+                  <input type="number" id="input-pun-rent" class="form-input" min="20" max="300" step="1" value="85">
+                  <span class="affix-suffix">/sq ft/mo</span>
+                </div>
+              </div>
+            </aside>
+
+            <!-- Results & Market Context (Right) -->
+            <div class="comparison-results-panel">
+              <!-- Three Cards Grid -->
+              <div class="results-cards-grid" id="city-results-cards">
+                <!-- Bengaluru Card -->
+                <div class="city-cost-card" id="card-cost-bengaluru">
+                  <div class="city-cost-header">
+                    <h3 class="city-cost-name">Bengaluru</h3>
+                    <p class="city-cost-tagline">Deepest engineering ecosystem; highest talent competition</p>
+                  </div>
+                  <div class="city-total-display">
+                    <div class="total-label">Total Annual (Salary + Rent)</div>
+                    <div class="total-value-big" id="val-total-blr">₹25.20 Cr</div>
+                  </div>
+                  <div class="cost-breakdown-list">
+                    <div class="breakdown-row">
+                      <span class="breakdown-label">Salary Component</span>
+                      <span class="breakdown-val" id="val-salary-blr">₹24.00 Cr</span>
+                    </div>
+                    <div class="breakdown-row">
+                      <span class="breakdown-label">Base Rent Component</span>
+                      <span class="breakdown-val" id="val-rent-blr">₹1.20 Cr</span>
+                    </div>
+                    <div class="breakdown-row">
+                      <span class="breakdown-label">Total Area</span>
+                      <span class="breakdown-val" id="val-area-blr">10,000 sq ft</span>
+                    </div>
+                  </div>
+                  <div class="city-qualitative-notes">
+                    <strong>HQ Trade-off:</strong> Highest initial cost; superior availability for specialized senior architects & platform talent.
+                  </div>
+                </div>
+
+                <!-- Hyderabad Card -->
+                <div class="city-cost-card" id="card-cost-hyderabad">
+                  <div class="city-cost-header">
+                    <h3 class="city-cost-name">Hyderabad</h3>
+                    <p class="city-cost-tagline">Grade-A infrastructure corridors & proactive state support</p>
+                  </div>
+                  <div class="city-total-display">
+                    <div class="total-label">Total Annual (Salary + Rent)</div>
+                    <div class="total-value-big" id="val-total-hyd">₹22.96 Cr</div>
+                  </div>
+                  <div class="cost-breakdown-list">
+                    <div class="breakdown-row">
+                      <span class="breakdown-label">Salary Component</span>
+                      <span class="breakdown-val" id="val-salary-hyd">₹22.00 Cr</span>
+                    </div>
+                    <div class="breakdown-row">
+                      <span class="breakdown-label">Base Rent Component</span>
+                      <span class="breakdown-val" id="val-rent-hyd">₹0.96 Cr</span>
+                    </div>
+                    <div class="breakdown-row">
+                      <span class="breakdown-label">Total Area</span>
+                      <span class="breakdown-val" id="val-area-hyd">10,000 sq ft</span>
+                    </div>
+                  </div>
+                  <div class="city-qualitative-notes">
+                    <strong>HQ Trade-off:</strong> ~9% cost savings vs. BLR with world-class campus clusters in HITEC City & Financial District.
+                  </div>
+                </div>
+
+                <!-- Pune Card -->
+                <div class="city-cost-card" id="card-cost-pune">
+                  <div class="city-cost-header">
+                    <h3 class="city-cost-name">Pune</h3>
+                    <p class="city-cost-tagline">Financial software & automotive hub with stable retention</p>
+                  </div>
+                  <div class="city-total-display">
+                    <div class="total-label">Total Annual (Salary + Rent)</div>
+                    <div class="total-value-big" id="val-total-pun">₹22.02 Cr</div>
+                  </div>
+                  <div class="cost-breakdown-list">
+                    <div class="breakdown-row">
+                      <span class="breakdown-label">Salary Component</span>
+                      <span class="breakdown-val" id="val-salary-pun">₹21.00 Cr</span>
+                    </div>
+                    <div class="breakdown-row">
+                      <span class="breakdown-label">Base Rent Component</span>
+                      <span class="breakdown-val" id="val-rent-pun">₹1.02 Cr</span>
+                    </div>
+                    <div class="breakdown-row">
+                      <span class="breakdown-label">Total Area</span>
+                      <span class="breakdown-val" id="val-area-pun">10,000 sq ft</span>
+                    </div>
+                  </div>
+                  <div class="city-qualitative-notes">
+                    <strong>HQ Trade-off:</strong> ~13% cost savings vs. BLR; lower voluntary turnover; smaller absolute senior talent pool.
+                  </div>
+                </div>
+              </div>
+
+              <!-- JLL Sourced Context Card -->
+              <article class="jll-macro-card" aria-labelledby="heading-jll-macro">
+                <div class="panel-header-row">
+                  <div>
+                    <h3 id="heading-jll-macro" class="serif-heading">Commercial Real Estate Depth (JLL 2025 Leasing)</h3>
+                    <p>Gross absorption benchmarks across candidate cities.</p>
+                  </div>
+                  <a href="https://www.jll.com/en-in/newsroom/india-s-office-market-scales-unprecedented-highs-with-gross-leasing-activity-at-83-3-million-sq-ft-for-the-year-2025-jll" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                    <span>View JLL Release</span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                  </a>
+                </div>
+
+                <div class="jll-metrics-row">
+                  <div class="jll-metric-box">
+                    <div class="jll-metric-city">Bengaluru</div>
+                    <div class="jll-metric-val">24.1M sq ft</div>
+                    <div class="jll-metric-desc">FY2025 gross office leasing</div>
+                  </div>
+                  <div class="jll-metric-box">
+                    <div class="jll-metric-city">Hyderabad</div>
+                    <div class="jll-metric-val">11.7M sq ft</div>
+                    <div class="jll-metric-desc">FY2025 gross office leasing</div>
+                  </div>
+                  <div class="jll-metric-box">
+                    <div class="jll-metric-city">Pune</div>
+                    <div class="jll-metric-val">8.1M sq ft</div>
+                    <div class="jll-metric-desc">FY2025 gross office leasing</div>
+                  </div>
+                </div>
+
+                <div class="warning-callout-box" role="note">
+                  <strong>Explicit Scope Disclosure:</strong> JLL's gross leasing data reflects <strong>ALL office occupiers</strong> (domestic corporations, global banks, third-party IT outsourcers, manufacturing hubs), not exclusively GCCs. Furthermore, office square footage is a real-estate liquidity indicator and <strong>does NOT equal engineering talent-pool headcount</strong>.
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- VIEW 3: SERVICE PROVIDERS                  -->
+        <!-- ========================================== -->
+        <section id="view-providers" class="app-view-panel" aria-labelledby="heading-providers" style="display: none;">
+          <div class="view-header">
+            <div class="view-meta-row">
+              <div class="view-title-group">
+                <h1 id="heading-providers">Service Providers Diligence</h1>
+                <p class="view-lead">Inspect verified public service scopes and recommended diligence questions before entering commercial negotiations.</p>
+              </div>
+              <div class="prototype-notice-pill">
+                <span>Public scope only • No fabricated ratings</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="warning-callout-box" style="margin-bottom: 24px;" role="note">
+            <strong>Diligence Standard:</strong> This workspace contains <strong>no fabricated user ratings, customer reviews, or delivery endorsements</strong>. Entries represent verified public service descriptions and recommended audit questions for mid-market expansion leads.
+          </div>
+
+          <div class="providers-grid">
+            <!-- ANSR Card -->
+            <article class="provider-card" aria-labelledby="provider-ansr-title">
+              <div>
+                <div class="provider-header">
+                  <div>
+                    <h2 id="provider-ansr-title" class="serif-heading">ANSR</h2>
+                    <span class="provider-focus">GCC Design, Setup & End-to-End Operations</span>
+                  </div>
+                  <span class="badge badge-sector">Setup Partner</span>
+                </div>
+
+                <div style="margin: 16px 0;">
+                  <p><strong>Public Service Scope:</strong> Full-lifecycle GCC establishment spanning entity setup, talent acquisition, workspace advisory, and operational handover under Build-Operate-Transfer (BOT) or joint operating models.</p>
+                </div>
+
+                <div class="prop-row" style="margin-bottom: 14px;">
+                  <span class="prop-key">Evidence Status:</span>
+                  <span class="badge badge-analyst">Provider description; outcomes self-reported</span>
+                </div>
+
+                <div class="diligence-box">
+                  <span class="diligence-title">Recommended Next Diligence Question:</span>
+                  <p class="diligence-body">Request two relevant mid-market client references with verified project delivery timelines, SLA penalty structures, and actual engineer attrition rates.</p>
+                </div>
+              </div>
+
+              <div class="company-card-actions">
+                <a href="https://ansr.com/global-capability-center/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                  <span>Visit Public Source</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+              </div>
+            </article>
+
+            <!-- JLL India Card -->
+            <article class="provider-card" aria-labelledby="provider-jll-title">
+              <div>
+                <div class="provider-header">
+                  <div>
+                    <h2 id="provider-jll-title" class="serif-heading">JLL India</h2>
+                    <span class="provider-focus">Workspace Selection, Design & Property Management</span>
+                  </div>
+                  <span class="badge badge-sector">Real Estate Advisory</span>
+                </div>
+
+                <div style="margin: 16px 0;">
+                  <p><strong>Public Service Scope:</strong> Commercial real estate advisory, Grade-A office site selection across Tier-1/Tier-2 micro-markets, lease transaction structuring, workplace fit-out design, and facilities operations.</p>
+                </div>
+
+                <div class="prop-row" style="margin-bottom: 14px;">
+                  <span class="prop-key">Evidence Status:</span>
+                  <span class="badge badge-analyst">Provider description; no independently checked delivery outcomes in this demo</span>
+                </div>
+
+                <div class="diligence-box">
+                  <span class="diligence-title">Recommended Next Diligence Question:</span>
+                  <p class="diligence-body">Request current micro-market building availability quotes, commercial transaction fee schedules, and recent GCC client tenant references.</p>
+                </div>
+              </div>
+
+              <div class="company-card-actions">
+                <a href="https://www.jll.com/en-in/property-types/global-capability-centres" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                  <span>Visit Public Source</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- VIEW 4: MY SHORTLIST                       -->
+        <!-- ========================================== -->
+        <section id="view-shortlist" class="app-view-panel" aria-labelledby="heading-shortlist" style="display: none;">
+          <div class="view-header">
+            <div class="view-meta-row">
+              <div class="view-title-group">
+                <h1 id="heading-shortlist">My Shortlist & Decision Brief</h1>
+                <p class="view-lead">Review saved peer footprints and export an inspectable decision brief for executive leadership.</p>
+              </div>
+              <div class="shortlist-export-actions">
+                <button type="button" class="btn btn-primary" id="btn-export-md" aria-label="Export Decision Brief as Markdown">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                  <span>Export Decision Brief (.md)</span>
+                </button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btn-export-txt" aria-label="Export Decision Brief as Plain Text">
+                  <span>Export (.txt)</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top summary row -->
+          <div class="shortlist-top-bar">
+            <div>
+              <strong id="shortlist-status-heading">0 Saved Peer Records</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Saved in local browser storage</div>
+            </div>
+            <div>
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-clear-shortlist" style="display: none;">Clear All Saved</button>
+            </div>
+          </div>
+
+          <!-- Saved Items Grid -->
+          <div class="companies-grid" id="shortlist-companies-container" aria-label="Shortlisted Companies">
+            <!-- Dynamically populated -->
+          </div>
+
+          <!-- Empty Shortlist State -->
+          <div id="shortlist-empty-state" class="empty-state-box">
+            <div class="empty-state-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+            </div>
+            <h3 class="serif-heading">Your shortlist is currently empty</h3>
+            <p>You haven't bookmarked any peer GCCs yet. Go to <strong>Explore GCCs</strong> and click "Save to shortlist" on relevant peers to incorporate them into your HQ briefing packet.</p>
+            <button type="button" class="btn btn-primary btn-sm" id="btn-goto-explore">Browse Peer GCCs</button>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- VIEW 5: SOURCES & METHODOLOGY              -->
+        <!-- ========================================== -->
+        <section id="view-methodology" class="app-view-panel" aria-labelledby="heading-methodology" style="display: none;">
+          <div class="view-header">
+            <div class="view-meta-row">
+              <div class="view-title-group">
+                <h1 id="heading-methodology">Sources and Methodology</h1>
+                <p class="view-lead">Rigorous definitions, research standards, and explicit boundaries governing this prototype.</p>
+              </div>
+              <div class="prototype-notice-pill">
+                <span>Analytical Rigor Standard</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="methodology-container">
+            <!-- Definition of a GCC -->
+            <article class="methodology-section" aria-labelledby="meth-def-title">
+              <h2 id="meth-def-title" class="serif-heading" style="margin-bottom: 12px;">1. Operational Definition of a GCC</h2>
+              <p>For the purpose of GCC Atlas, a <strong>Global Capability Center (GCC)</strong> is defined strictly as a <strong>company-controlled India capability unit serving its global parent organization</strong>.</p>
+              
+              <ul class="methodology-list">
+                <li><strong>Parent Counting Standard:</strong> The global corporate parent is counted once. Discrete regional campuses, physical operating facilities, and legal entities in India are mapped separately under the parent.</li>
+                <li><strong>Exclusion of Third-Party Outsourcers:</strong> Third-party IT/BPO service providers (e.g., TCS, Infosys, Wipro, Cognizant, Accenture) are strictly excluded from the peer database.</li>
+                <li><strong>Footprint Classification:</strong> Evidence distinguishes clearly between public intent announcements, confirmed operating facilities, and subsequent campus expansions.</li>
+                <li><strong>Job Posting Rule:</strong> Job postings or recruiter listings alone do <em>not</em> establish a verified GCC footprint, as they frequently indicate pilot hiring, contractor staffing, or speculative mandates.</li>
+              </ul>
+            </article>
+
+            <!-- Evidence Standards -->
+            <article class="methodology-section" aria-labelledby="meth-evidence-title">
+              <h2 id="meth-evidence-title" class="serif-heading" style="margin-bottom: 12px;">2. Evidence Hierarchy & Claims Verification</h2>
+              <p>Every claim in this workspace is linked to inspectable source material. We maintain an explicit distinction between corporate self-reported statements and independent verification:</p>
+              
+              <ul class="methodology-list">
+                <li><strong>Company Source Supports Claim:</strong> Official corporate press releases, verified newsroom statements, and primary corporate portals. These confirm corporate presence and geographic locations.</li>
+                <li><strong>Independently Verified:</strong> Corporate entity filings (Ministry of Corporate Affairs / MCA), audited regulatory disclosures, or registered property deeds.</li>
+                <li><strong>Undated Sources:</strong> Websites without explicit publication timestamps remain labeled as <code>Undated current website</code> as of the research check date (12 October 2026). Timestamps are never fabricated.</li>
+                <li><strong>Analyst Classification:</strong> Functional categorizations inferred from career listings or secondary profiles are explicitly marked as <code>Analyst classification</code>.</li>
+              </ul>
+            </article>
+
+            <!-- Implementation Boundaries -->
+            <article class="methodology-section" aria-labelledby="meth-boundaries-title">
+              <h2 id="meth-boundaries-title" class="serif-heading" style="margin-bottom: 12px;">3. Prototype Scope & Implementation Boundaries</h2>
+              <p>This prototype is engineered specifically for the <strong>Flexiple Product Intern assignment</strong> authored by <strong>Andluru Sai Punith Reddy</strong>:</p>
+
+              <ul class="methodology-list">
+                <li><strong>Curated Data:</strong> Exactly four seed company records researched on 12 October 2026. Does not claim exhaustive coverage of India's 1,600+ GCCs.</li>
+                <li><strong>Browser-Local State:</strong> Shortlist and scenario modifications are stored locally in the user's browser (<code>localStorage</code>) with defensive corruption recovery. No account, API keys, or server authentication required.</li>
+                <li><strong>Deterministic Cost Scenario:</strong> Cost models use transparent, reproducible arithmetic formulas. No dynamic algorithmic black boxes or hidden variables.</li>
+                <li><strong>AI Disclosure:</strong> Generative AI and agent tools were leveraged to accelerate code architecture and research formatting; however, <strong>no live LLM inference runs inside this prototype runtime</strong>. Automated AI extraction is documented on the future product roadmap.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <!-- Subtle Global Footer -->
+      <footer class="app-footer">
+        <div>
+          <span>GCC Atlas</span> • <span class="footer-author">Author: Andluru Sai Punith Reddy</span> • Flexiple Product Intern Assignment
+        </div>
+        <div>
+          <span>Researched on 12 October 2026 • Curated Prototype</span>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- EVIDENCE DETAIL DRAWER / MODAL             -->
+  <!-- ========================================== -->
+  <div class="drawer-backdrop" id="evidence-drawer-backdrop" role="dialog" aria-modal="true" aria-labelledby="drawer-company-name" aria-hidden="true">
+    <div class="evidence-drawer" id="evidence-drawer">
+      <div class="drawer-header">
+        <div class="drawer-title-group">
+          <span class="badge badge-city" id="drawer-city-badge">Bengaluru</span>
+          <h2 id="drawer-company-name" class="serif-heading">Company Evidence Detail</h2>
+          <span class="company-parent" id="drawer-parent-label">Global Parent: Company</span>
+        </div>
+        <button type="button" class="drawer-close-btn" id="btn-close-drawer" aria-label="Close evidence detail dialog">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          <span>Close</span>
+        </button>
+      </div>
+
+      <div class="drawer-content">
+        <!-- Verification Banner -->
+        <div class="drawer-section">
+          <span class="drawer-section-label">Evidence Verification Status</span>
+          <div class="audit-status-banner">
+            <strong id="drawer-status-title">Company source supports this claim</strong>
+            <p id="drawer-status-note" style="margin-top: 4px; font-size: 0.82rem; color: #175225;">Primary company source supports operational presence and tenure.</p>
+          </div>
+        </div>
+
+        <!-- Claim Summary -->
+        <div class="drawer-section">
+          <span class="drawer-section-label">Supported Primary Claim</span>
+          <div class="company-claim-excerpt" id="drawer-claim-summary">
+            The company website describes its capability hub and confirms operations.
+          </div>
+        </div>
+
+        <!-- Meta Properties -->
+        <div class="drawer-section">
+          <span class="drawer-section-label">Footprint Attributes</span>
+          <div class="company-props-list">
+            <div class="prop-row">
+              <span class="prop-key">Sector:</span>
+              <span class="prop-val" id="drawer-prop-sector">Retail</span>
+            </div>
+            <div class="prop-row">
+              <span class="prop-key">Verified Functions:</span>
+              <span class="prop-val" id="drawer-prop-functions">Technology and retail operations</span>
+            </div>
+            <div class="prop-row">
+              <span class="prop-key">Classification Standard:</span>
+              <span class="prop-val" id="drawer-prop-classification">Company reported</span>
+            </div>
+            <div class="prop-row">
+              <span class="prop-key">Established Year:</span>
+              <span class="prop-val" id="drawer-prop-established">2004</span>
+            </div>
+            <div class="prop-row">
+              <span class="prop-key">Research Check Date:</span>
+              <span class="prop-val" id="drawer-prop-checked">12 October 2026</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Original Source Links -->
+        <div class="drawer-section">
+          <span class="drawer-section-label">Original Sourced Materials</span>
+          <div class="sources-list" id="drawer-sources-container">
+            <!-- Dynamically populated with safe links -->
+          </div>
+        </div>
+
+        <!-- Unresolved Diligence Gaps -->
+        <div class="drawer-section">
+          <span class="drawer-section-label">Unresolved Diligence Gaps (HQ Audit Questions)</span>
+          <div class="gaps-warning-box">
+            <strong>⚠️ Diligence Required:</strong>
+            <p id="drawer-gaps-text" style="margin-top: 4px; font-size: 0.82rem; color: #724213;">
+              Current hiring capacity, compensation and legal-entity mapping are not verified.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="drawer-footer">
+        <button type="button" class="btn btn-secondary btn-sm" id="drawer-secondary-close">Close Drawer</button>
+        <button type="button" class="btn btn-accent btn-sm" id="drawer-btn-toggle-shortlist">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+          <span id="drawer-shortlist-action-text">Save to shortlist</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 90-SECOND REVIEWER TOUR MODAL              -->
+  <!-- ========================================== -->
+  <div class="tour-modal-backdrop" id="tour-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="tour-modal-title" aria-hidden="true">
+    <div class="tour-modal">
+      <div class="panel-header-row">
+        <div>
+          <h2 id="tour-modal-title" class="serif-heading">90-Second Reviewer Walkthrough</h2>
+          <p style="font-size: 0.82rem; color: var(--text-muted);">Step-by-step evaluation guide for Flexiple reviewers</p>
+        </div>
+        <button type="button" class="drawer-close-btn" id="btn-close-tour" aria-label="Close tour dialog">&times;</button>
+      </div>
+
+      <div class="tour-step-list">
+        <div class="tour-step-item">
+          <div class="tour-step-badge">1</div>
+          <div class="tour-step-content">
+            <div class="tour-step-title">Explore GCCs & Search DBS</div>
+            <div class="tour-step-desc">Go to "Explore GCCs", type <code>DBS</code> into the search box. Exactly 1 record will appear with verified functions and source timestamps.</div>
+          </div>
+        </div>
+
+        <div class="tour-step-item">
+          <div class="tour-step-badge">2</div>
+          <div class="tour-step-content">
+            <div class="tour-step-title">Inspect Source Evidence & Save</div>
+            <div class="tour-step-desc">Click "Inspect Evidence" on DBS Tech India. Review primary links (2018 corporate release & undated portal) and unresolved diligence gaps. Then click "Save to shortlist".</div>
+          </div>
+        </div>
+
+        <div class="tour-step-item">
+          <div class="tour-step-badge">3</div>
+          <div class="tour-step-content">
+            <div class="tour-step-title">Compare Cities & Validate Math</div>
+            <div class="tour-step-desc">Open "Compare cities". Check default annual costs: Bengaluru (₹25.20 Cr), Hyderabad (₹22.96 Cr), and Pune (₹22.02 Cr).</div>
+          </div>
+        </div>
+
+        <div class="tour-step-item">
+          <div class="tour-step-badge">4</div>
+          <div class="tour-step-content">
+            <div class="tour-step-title">Test Sensitivity (BLR Salary 24 → 26 Lakh)</div>
+            <div class="tour-step-desc">Change Bengaluru Annual Salary from 24 to 26 Lakh. Bengaluru total immediately updates to ₹27.20 Cr.</div>
+          </div>
+        </div>
+
+        <div class="tour-step-item">
+          <div class="tour-step-badge">5</div>
+          <div class="tour-step-content">
+            <div class="tour-step-title">Export Decision Brief</div>
+            <div class="tour-step-desc">Navigate to "My Shortlist". Click "Export Decision Brief (.md)" to instantly download the comprehensive, formatted briefing packet.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 8px;">
+        <button type="button" class="btn btn-primary btn-sm" id="btn-start-guided-tour">Start Exploring</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/calculator.js"></script>
+  <script src="js/export.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
