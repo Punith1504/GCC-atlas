@@ -321,6 +321,7 @@ a:hover {
   background: var(--bg-surface-subtle);
   color: var(--text-main);
   border: 1px solid var(--border-light);
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .nav-pill-count.has-items {
@@ -328,6 +329,7 @@ a:hover {
   color: var(--text-main);
   font-weight: 700;
   border-color: #B5D254;
+  transform: scale(1.08);
 }
 
 /* Sidebar Footer */
@@ -354,11 +356,12 @@ a:hover {
   justify-content: center;
   gap: 6px;
   margin-bottom: 12px;
-  transition: background 0.15s ease;
+  transition: background 0.15s ease, transform 0.1s ease;
 }
 
 .quick-tour-trigger:hover {
   background: var(--accent-lime-hover);
+  transform: translateY(-1px);
 }
 
 /* Main Content Area */
@@ -477,6 +480,7 @@ a:hover {
 .btn-primary:hover {
   background: var(--accent-forest-light);
   color: var(--bg-app);
+  transform: translateY(-1px);
 }
 
 .btn-accent {
@@ -487,6 +491,7 @@ a:hover {
 
 .btn-accent:hover {
   background: var(--accent-lime-hover);
+  transform: translateY(-1px);
 }
 
 .btn-secondary {
@@ -514,21 +519,6 @@ a:hover {
 
 .btn-saved:hover {
   background: #E2F2A5;
-}
-
-/* Cards & Grid */
-.editorial-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  box-shadow: var(--shadow-subtle);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
-}
-
-.editorial-card:hover {
-  border-color: var(--border-strong);
-  box-shadow: var(--shadow-card);
 }
 
 /* Explore View Controls */
@@ -582,7 +572,7 @@ a:hover {
   border: none;
   color: var(--text-muted);
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.1rem;
   padding: 4px;
 }
 
@@ -657,6 +647,7 @@ a:hover {
 .company-card:hover {
   border-color: var(--border-strong);
   box-shadow: var(--shadow-card);
+  transform: translateY(-2px);
 }
 
 .company-card-header {
@@ -803,7 +794,7 @@ a:hover {
 /* City Comparison View Layout */
 .comparison-layout {
   display: grid;
-  grid-template-columns: 340px 1fr;
+  grid-template-columns: 360px 1fr;
   gap: 28px;
   align-items: start;
 }
@@ -836,6 +827,51 @@ a:hover {
   color: var(--badge-warning-text);
   line-height: 1.4;
   margin-bottom: 18px;
+}
+
+/* Preset Headcount Buttons */
+.preset-chips-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.preset-chips-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.preset-chips-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.preset-chip {
+  background: var(--bg-app);
+  border: 1px solid var(--border-strong);
+  color: var(--text-main);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.preset-chip:hover {
+  background: var(--accent-lime-subtle);
+  border-color: var(--accent-forest-light);
+}
+
+.preset-chip.active {
+  background: var(--accent-lime);
+  border-color: #B5D254;
+  font-weight: 700;
 }
 
 .input-section-title {
@@ -910,6 +946,15 @@ a:hover {
   outline: none;
 }
 
+/* Styled Range Sliders */
+.form-range {
+  width: 100%;
+  height: 6px;
+  margin: 6px 0 4px 0;
+  accent-color: var(--text-main);
+  cursor: pointer;
+}
+
 .input-error-msg {
   font-size: 0.75rem;
   color: #B42318;
@@ -923,6 +968,126 @@ a:hover {
   gap: 24px;
 }
 
+/* Interactive Visual Comparison Bar Chart */
+.interactive-bars-panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  box-shadow: var(--shadow-subtle);
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chart-legend {
+  display: flex;
+  gap: 14px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+.swatch-salary {
+  background: var(--text-main);
+}
+
+.swatch-rent {
+  background: var(--accent-lime);
+  border: 1px solid #B0CC48;
+}
+
+.city-chart-row {
+  margin-bottom: 16px;
+}
+
+.chart-row-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+}
+
+.chart-city-name {
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.chart-city-total {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.stacked-bar-track {
+  height: 24px;
+  background: var(--bg-surface-subtle);
+  border-radius: var(--radius-sm);
+  display: flex;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+}
+
+.bar-segment {
+  height: 100%;
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.bar-segment-salary {
+  background: var(--text-main);
+}
+
+.bar-segment-rent {
+  background: var(--accent-lime);
+  color: var(--text-main);
+}
+
+.delta-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: var(--radius-pill);
+  margin-left: 8px;
+}
+
+.delta-savings {
+  background: #E8F5E9;
+  color: #1E662A;
+}
+
+.delta-baseline {
+  background: var(--bg-surface-subtle);
+  color: var(--text-muted);
+}
+
+/* Three Cards Grid */
 .results-cards-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -939,7 +1104,12 @@ a:hover {
   justify-content: space-between;
   box-shadow: var(--shadow-subtle);
   position: relative;
-  transition: border-color 0.15s ease;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.city-cost-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
 }
 
 .city-cost-card.highlight-lowest {
@@ -1089,6 +1259,12 @@ a:hover {
   flex-direction: column;
   justify-content: space-between;
   gap: 16px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.provider-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
 }
 
 .provider-header {
@@ -1145,6 +1321,30 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Live Decision Brief Document Preview */
+.brief-preview-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 26px;
+  margin-top: 28px;
+  box-shadow: var(--shadow-subtle);
+}
+
+.brief-paper-container {
+  background: #FAFAF7;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: 24px 28px;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  max-height: 480px;
+  overflow-y: auto;
+  white-space: pre-wrap;
 }
 
 /* Methodology View */
@@ -1329,7 +1529,44 @@ a:hover {
   bottom: 0;
 }
 
-/* Reviewer Walkthrough Modal */
+/* Toast Notifications */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.toast {
+  background: var(--text-main);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 500;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-left: 4px solid var(--accent-lime);
+  transform: translateY(20px);
+  opacity: 0;
+  animation: toastIn 0.3s forwards cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+}
+
+@keyframes toastIn {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Tour Modal */
 .tour-modal-backdrop {
   position: fixed;
   top: 0;
@@ -1353,7 +1590,7 @@ a:hover {
   background: var(--bg-surface);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-lg);
-  max-width: 600px;
+  max-width: 620px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
@@ -1378,6 +1615,7 @@ a:hover {
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
   padding: 12px;
+  transition: border-color 0.15s ease;
 }
 
 .tour-step-badge {

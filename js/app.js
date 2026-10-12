@@ -1,5 +1,7 @@
 // GCC Atlas - Application Controller
 // Author: Andluru Sai Punith Reddy
+// Includes: Reactive filtering, interactive sliders, visual stacked bar graphs,
+// toast notifications, live brief inspector, and automated 90s demo player.
 
 (function (window, document) {
   'use strict';
@@ -19,7 +21,8 @@
       hyderabad: { salaryLakh: 22, monthlyRent: 80 },
       pune: { salaryLakh: 21, monthlyRent: 85 }
     },
-    costResults: {}
+    costResults: {},
+    isAutoDemoRunning: false
   };
 
   // DOM Elements Cache
@@ -42,18 +45,39 @@
     exploreEmptyState: document.getElementById('explore-empty-state'),
     btnResetFilters: document.getElementById('btn-reset-filters'),
 
-    // Calculator inputs
+    // Calculator inputs & sliders
     inputEmployees: document.getElementById('input-employees'),
+    rangeEmployees: document.getElementById('range-employees'),
     inputSqft: document.getElementById('input-sqft'),
     inputBlrSalary: document.getElementById('input-blr-salary'),
+    rangeBlrSalary: document.getElementById('range-blr-salary'),
     inputBlrRent: document.getElementById('input-blr-rent'),
+    rangeBlrRent: document.getElementById('range-blr-rent'),
     inputHydSalary: document.getElementById('input-hyd-salary'),
+    rangeHydSalary: document.getElementById('range-hyd-salary'),
     inputHydRent: document.getElementById('input-hyd-rent'),
+    rangeHydRent: document.getElementById('range-hyd-rent'),
     inputPunSalary: document.getElementById('input-pun-salary'),
+    rangePunSalary: document.getElementById('range-pun-salary'),
     inputPunRent: document.getElementById('input-pun-rent'),
+    rangePunRent: document.getElementById('range-pun-rent'),
     btnResetAssumptions: document.getElementById('btn-reset-assumptions'),
+    presetChips: document.querySelectorAll('.preset-chip'),
 
-    // Calculator outputs
+    // Visual Bar Chart
+    chartTotalBlr: document.getElementById('chart-total-blr'),
+    barSalBlr: document.getElementById('bar-sal-blr'),
+    barRentBlr: document.getElementById('bar-rent-blr'),
+    chartTotalHyd: document.getElementById('chart-total-hyd'),
+    barSalHyd: document.getElementById('bar-sal-hyd'),
+    barRentHyd: document.getElementById('bar-rent-hyd'),
+    deltaHyd: document.getElementById('delta-hyd'),
+    chartTotalPun: document.getElementById('chart-total-pun'),
+    barSalPun: document.getElementById('bar-sal-pun'),
+    barRentPun: document.getElementById('bar-rent-pun'),
+    deltaPun: document.getElementById('delta-pun'),
+
+    // Calculator card outputs
     valTotalBlr: document.getElementById('val-total-blr'),
     valSalaryBlr: document.getElementById('val-salary-blr'),
     valRentBlr: document.getElementById('val-rent-blr'),
@@ -81,6 +105,7 @@
     btnGotoExplore: document.getElementById('btn-goto-explore'),
     btnExportMd: document.getElementById('btn-export-md'),
     btnExportTxt: document.getElementById('btn-export-txt'),
+    btnPreviewBrief: document.getElementById('btn-preview-brief'),
 
     // Evidence Drawer
     drawerBackdrop: document.getElementById('evidence-drawer-backdrop'),
@@ -106,7 +131,17 @@
     tourModalBackdrop: document.getElementById('tour-modal-backdrop'),
     btnOpenTour: document.getElementById('btn-open-tour'),
     btnCloseTour: document.getElementById('btn-close-tour'),
-    btnStartGuidedTour: document.getElementById('btn-start-guided-tour')
+    btnStartGuidedTour: document.getElementById('btn-start-guided-tour'),
+    btnAutoDemo: document.getElementById('btn-auto-demo'),
+
+    // Toast Container
+    toastContainer: document.getElementById('toast-container'),
+
+    // Live Brief Preview Modal
+    briefModalBackdrop: document.getElementById('brief-modal-backdrop'),
+    briefModalContent: document.getElementById('brief-modal-content'),
+    btnCloseBriefModal: document.getElementById('btn-close-brief-modal'),
+    btnCopyBriefModal: document.getElementById('btn-copy-brief-modal')
   };
 
   // Helper: Escape HTML
@@ -118,6 +153,22 @@
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;');
+  }
+
+  // Toast Notification System
+  function showToast(message, icon = '✨') {
+    if (!elements.toastContainer) return;
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerHTML = `<span>${icon}</span><span>${escapeHtml(message)}</span>`;
+    elements.toastContainer.appendChild(toast);
+
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(10px)';
+      toast.style.transition = 'all 0.3s ease';
+      setTimeout(() => toast.remove(), 300);
+    }, 2800);
   }
 
   // Navigation Logic
@@ -139,16 +190,13 @@
       panel.style.display = isPanel ? 'block' : 'none';
     });
 
-    // Close mobile nav drawer if open
     if (elements.appSidebar.classList.contains('mobile-open')) {
       elements.appSidebar.classList.remove('mobile-open');
       elements.mobileNavToggle.setAttribute('aria-expanded', 'false');
     }
 
-    // Scroll to top of viewport
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // Refresh view specific components
     if (targetViewId === 'shortlist') {
       renderShortlistView();
     } else if (targetViewId === 'explore') {
@@ -257,18 +305,23 @@
       `;
     }).join('');
 
-    // Attach card event listeners
     container.querySelectorAll('.btn-inspect-evidence').forEach(btn => {
-      btn.addEventListener('click', (e) => {
+      btn.addEventListener('click', () => {
         const id = btn.getAttribute('data-id');
         openEvidenceDrawer(id, btn);
       });
     });
 
     container.querySelectorAll('.btn-toggle-shortlist').forEach(btn => {
-      btn.addEventListener('click', (e) => {
+      btn.addEventListener('click', () => {
         const id = btn.getAttribute('data-id');
-        window.GCC_STORAGE.toggleSave(id);
+        const isNowSaved = window.GCC_STORAGE.toggleSave(id);
+        const comp = window.GCC_DATA.companies.find(item => item.id === id);
+        if (isNowSaved) {
+          showToast(`Added ${comp.name} to your shortlist!`, '🔖');
+        } else {
+          showToast(`Removed ${comp.name} from shortlist`, '🗑️');
+        }
       });
     });
   }
@@ -281,7 +334,6 @@
     state.activeDrawerCompanyId = companyId;
     state.lastFocusedElement = triggerElement || document.activeElement;
 
-    // Populate drawer elements
     elements.drawerCompanyName.textContent = company.name;
     elements.drawerParentLabel.textContent = `Global Parent: ${company.parent}`;
     elements.drawerCityBadge.textContent = company.city;
@@ -296,7 +348,6 @@
     elements.drawerPropChecked.textContent = company.researchCheckDate;
     elements.drawerGapsText.textContent = company.unresolvedGaps;
 
-    // Render Sources with safe attributes
     elements.drawerSourcesContainer.innerHTML = company.sources.map(s => `
       <div class="source-item-card">
         <a href="${escapeHtml(s.url)}" target="_blank" rel="noopener noreferrer" class="source-link" aria-label="Open source in new window: ${escapeHtml(s.title)}">
@@ -309,10 +360,8 @@
       </div>
     `).join('');
 
-    // Update shortlist button in drawer
     updateDrawerShortlistButton();
 
-    // Show drawer
     elements.drawerBackdrop.classList.add('open');
     elements.drawerBackdrop.setAttribute('aria-hidden', 'false');
     elements.btnCloseDrawer.focus();
@@ -325,7 +374,6 @@
     document.body.style.overflow = '';
     state.activeDrawerCompanyId = null;
 
-    // Restore focus
     if (state.lastFocusedElement && typeof state.lastFocusedElement.focus === 'function') {
       state.lastFocusedElement.focus();
     }
@@ -338,7 +386,7 @@
     elements.drawerBtnToggleShortlist.className = isSaved ? 'btn btn-secondary btn-sm' : 'btn btn-accent btn-sm';
   }
 
-  // Cost Scenario Calculator Wiring
+  // Cost Scenario Calculator & Visual Chart Wiring
   function updateScenarioCalculations() {
     const employees = Number(elements.inputEmployees.value) || 0;
     const sqFtPerEmployee = Number(elements.inputSqft.value) || 0;
@@ -352,7 +400,6 @@
     const punSalary = Number(elements.inputPunSalary.value) || 0;
     const punRent = Number(elements.inputPunRent.value) || 0;
 
-    // Store in state
     state.scenario = {
       employees,
       sqFtPerEmployee,
@@ -372,23 +419,60 @@
       pune: { ...calcPun, name: 'Pune' }
     };
 
-    // Render Bengaluru
+    // Card Displays
     elements.valTotalBlr.textContent = window.GCC_CALCULATOR.formatCrore(calcBlr.totalCrore);
     elements.valSalaryBlr.textContent = window.GCC_CALCULATOR.formatCrore(calcBlr.salaryCrore);
     elements.valRentBlr.textContent = window.GCC_CALCULATOR.formatCrore(calcBlr.rentCrore);
     elements.valAreaBlr.textContent = `${window.GCC_CALCULATOR.formatNumber(calcBlr.totalAreaSqFt)} sq ft`;
 
-    // Render Hyderabad
     elements.valTotalHyd.textContent = window.GCC_CALCULATOR.formatCrore(calcHyd.totalCrore);
     elements.valSalaryHyd.textContent = window.GCC_CALCULATOR.formatCrore(calcHyd.salaryCrore);
     elements.valRentHyd.textContent = window.GCC_CALCULATOR.formatCrore(calcHyd.rentCrore);
     elements.valAreaHyd.textContent = `${window.GCC_CALCULATOR.formatNumber(calcHyd.totalAreaSqFt)} sq ft`;
 
-    // Render Pune
     elements.valTotalPun.textContent = window.GCC_CALCULATOR.formatCrore(calcPun.totalCrore);
     elements.valSalaryPun.textContent = window.GCC_CALCULATOR.formatCrore(calcPun.salaryCrore);
     elements.valRentPun.textContent = window.GCC_CALCULATOR.formatCrore(calcPun.rentCrore);
     elements.valAreaPun.textContent = `${window.GCC_CALCULATOR.formatNumber(calcPun.totalAreaSqFt)} sq ft`;
+
+    // Visual Stacked Bar Chart Displays
+    if (elements.chartTotalBlr) {
+      elements.chartTotalBlr.textContent = window.GCC_CALCULATOR.formatCrore(calcBlr.totalCrore);
+      elements.chartTotalHyd.textContent = window.GCC_CALCULATOR.formatCrore(calcHyd.totalCrore);
+      elements.chartTotalPun.textContent = window.GCC_CALCULATOR.formatCrore(calcPun.totalCrore);
+
+      const blrSalPct = calcBlr.totalCrore > 0 ? (calcBlr.salaryCrore / calcBlr.totalCrore) * 100 : 95;
+      const blrRentPct = 100 - blrSalPct;
+      elements.barSalBlr.style.width = `${blrSalPct.toFixed(1)}%`;
+      elements.barSalBlr.textContent = `${blrSalPct.toFixed(0)}% Sal`;
+      elements.barRentBlr.style.width = `${blrRentPct.toFixed(1)}%`;
+      elements.barRentBlr.textContent = `${blrRentPct.toFixed(0)}%`;
+
+      const hydSalPct = calcHyd.totalCrore > 0 ? (calcHyd.salaryCrore / calcHyd.totalCrore) * 100 : 96;
+      const hydRentPct = 100 - hydSalPct;
+      elements.barSalHyd.style.width = `${hydSalPct.toFixed(1)}%`;
+      elements.barSalHyd.textContent = `${hydSalPct.toFixed(0)}% Sal`;
+      elements.barRentHyd.style.width = `${hydRentPct.toFixed(1)}%`;
+      elements.barRentHyd.textContent = `${hydRentPct.toFixed(0)}%`;
+
+      const punSalPct = calcPun.totalCrore > 0 ? (calcPun.salaryCrore / calcPun.totalCrore) * 100 : 95;
+      const punRentPct = 100 - punSalPct;
+      elements.barSalPun.style.width = `${punSalPct.toFixed(1)}%`;
+      elements.barSalPun.textContent = `${punSalPct.toFixed(0)}% Sal`;
+      elements.barRentPun.style.width = `${punRentPct.toFixed(1)}%`;
+      elements.barRentPun.textContent = `${punRentPct.toFixed(0)}%`;
+
+      // Delta badges vs Bengaluru
+      if (calcBlr.totalCrore > 0) {
+        const diffHyd = ((calcHyd.totalCrore - calcBlr.totalCrore) / calcBlr.totalCrore) * 100;
+        elements.deltaHyd.textContent = `${diffHyd >= 0 ? '+' : ''}${diffHyd.toFixed(1)}% vs BLR`;
+        elements.deltaHyd.className = diffHyd < 0 ? 'delta-badge delta-savings' : 'delta-badge delta-baseline';
+
+        const diffPun = ((calcPun.totalCrore - calcBlr.totalCrore) / calcBlr.totalCrore) * 100;
+        elements.deltaPun.textContent = `${diffPun >= 0 ? '+' : ''}${diffPun.toFixed(1)}% vs BLR`;
+        elements.deltaPun.className = diffPun < 0 ? 'delta-badge delta-savings' : 'delta-badge delta-baseline';
+      }
+    }
 
     // Highlight lowest cost card
     const totals = [
@@ -406,18 +490,30 @@
   function resetAssumptions() {
     const def = window.GCC_CALCULATOR.DEFAULTS;
     elements.inputEmployees.value = def.employees;
+    if (elements.rangeEmployees) elements.rangeEmployees.value = def.employees;
     elements.inputSqft.value = def.sqFtPerEmployee;
 
     elements.inputBlrSalary.value = def.cities.bengaluru.salaryLakh;
+    if (elements.rangeBlrSalary) elements.rangeBlrSalary.value = def.cities.bengaluru.salaryLakh;
     elements.inputBlrRent.value = def.cities.bengaluru.monthlyRent;
+    if (elements.rangeBlrRent) elements.rangeBlrRent.value = def.cities.bengaluru.monthlyRent;
 
     elements.inputHydSalary.value = def.cities.hyderabad.salaryLakh;
+    if (elements.rangeHydSalary) elements.rangeHydSalary.value = def.cities.hyderabad.salaryLakh;
     elements.inputHydRent.value = def.cities.hyderabad.monthlyRent;
+    if (elements.rangeHydRent) elements.rangeHydRent.value = def.cities.hyderabad.monthlyRent;
 
     elements.inputPunSalary.value = def.cities.pune.salaryLakh;
+    if (elements.rangePunSalary) elements.rangePunSalary.value = def.cities.pune.salaryLakh;
     elements.inputPunRent.value = def.cities.pune.monthlyRent;
+    if (elements.rangePunRent) elements.rangePunRent.value = def.cities.pune.monthlyRent;
+
+    elements.presetChips.forEach(chip => {
+      chip.classList.toggle('active', chip.getAttribute('data-size') === '100');
+    });
 
     updateScenarioCalculations();
+    showToast('Assumptions reset to initial assignment defaults (BLR: ₹25.20 Cr)', '🔄');
   }
 
   // Shortlist View Controller
@@ -499,7 +595,9 @@
 
     container.querySelectorAll('.btn-remove-saved').forEach(btn => {
       btn.addEventListener('click', () => {
-        window.GCC_STORAGE.remove(btn.getAttribute('data-id'));
+        const id = btn.getAttribute('data-id');
+        window.GCC_STORAGE.remove(id);
+        showToast('Removed from shortlist', '🗑️');
       });
     });
   }
@@ -519,6 +617,39 @@
       },
       costResults: state.costResults
     }, format);
+
+    showToast(`Decision Brief downloaded (.${format})!`, '📄');
+  }
+
+  // Live Brief Inspector Modal
+  function openBriefModal() {
+    const savedIds = window.GCC_STORAGE.getShortlistIds();
+    const shortlistCompanies = window.GCC_DATA.companies.filter(c => savedIds.includes(c.id));
+    const allCompanies = window.GCC_DATA.companies;
+
+    const markdown = window.GCC_EXPORTER.generateDecisionBriefMarkdown({
+      shortlistCompanies,
+      allCompanies,
+      scenarioInputs: {
+        employees: state.scenario.employees,
+        sqFtPerEmployee: state.scenario.sqFtPerEmployee
+      },
+      costResults: state.costResults
+    });
+
+    if (elements.briefModalContent) {
+      elements.briefModalContent.textContent = markdown;
+    }
+
+    elements.briefModalBackdrop.classList.add('open');
+    elements.briefModalBackdrop.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeBriefModal() {
+    elements.briefModalBackdrop.classList.remove('open');
+    elements.briefModalBackdrop.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
   }
 
   // Tour Modal
@@ -539,9 +670,82 @@
     }
   }
 
+  // Automated 90s Walkthrough Rehearsal Player
+  function runAutoDemo() {
+    if (state.isAutoDemoRunning) return;
+    state.isAutoDemoRunning = true;
+    closeTourModal();
+    showToast('Starting 90-Second Walkthrough Demonstration...', '🎬');
+
+    // Step 1: Switch to Explore and search "DBS"
+    switchView('explore');
+    elements.exploreSearch.value = '';
+    elements.exploreSearch.focus();
+
+    let queryText = 'DBS';
+    let charIdx = 0;
+    const typeInterval = setInterval(() => {
+      elements.exploreSearch.value += queryText[charIdx];
+      state.searchQuery = elements.exploreSearch.value;
+      elements.exploreSearchClear.style.display = 'block';
+      renderExploreCards();
+      charIdx++;
+      if (charIdx >= queryText.length) {
+        clearInterval(typeInterval);
+        
+        // Step 2: Open Evidence Drawer for DBS
+        setTimeout(() => {
+          showToast('Step 2: Inspecting DBS Tech India primary citations...', '🔍');
+          openEvidenceDrawer('dbs-tech-india');
+
+          // Step 3: Save to shortlist
+          setTimeout(() => {
+            window.GCC_STORAGE.add('dbs-tech-india');
+            updateDrawerShortlistButton();
+            showToast('Step 3: Bookmarked DBS to executive shortlist!', '🔖');
+
+            // Step 4: Close drawer and switch to Compare Cities
+            setTimeout(() => {
+              closeEvidenceDrawer();
+              switchView('compare');
+              showToast('Step 4: Comparing Bengaluru, Hyderabad, and Pune costs...', '📊');
+
+              // Step 5: Animate BLR salary from 24 to 26 Lakh
+              setTimeout(() => {
+                showToast('Step 5: Testing sensitivity (BLR Salary 24 → 26 Lakh)...', '⚡');
+                elements.inputBlrSalary.value = '26';
+                if (elements.rangeBlrSalary) elements.rangeBlrSalary.value = '26';
+                updateScenarioCalculations();
+
+                // Step 6: Go to Shortlist
+                setTimeout(() => {
+                  switchView('shortlist');
+                  showToast('Walkthrough complete! Brief ready for download.', '✅');
+                  state.isAutoDemoRunning = false;
+                }, 2200);
+              }, 2000);
+            }, 1800);
+          }, 1800);
+        }, 1200);
+      }
+    }, 250);
+  }
+
+  // Synchronize range sliders with inputs
+  function setupRangeSync(inputEl, rangeEl) {
+    if (!inputEl || !rangeEl) return;
+    inputEl.addEventListener('input', () => {
+      rangeEl.value = inputEl.value;
+      updateScenarioCalculations();
+    });
+    rangeEl.addEventListener('input', () => {
+      inputEl.value = rangeEl.value;
+      updateScenarioCalculations();
+    });
+  }
+
   // Bind Event Listeners
   function bindEvents() {
-    // Nav buttons
     elements.navButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         const targetView = btn.getAttribute('data-view');
@@ -549,13 +753,11 @@
       });
     });
 
-    // Mobile nav toggle
     elements.mobileNavToggle.addEventListener('click', () => {
       const isOpen = elements.appSidebar.classList.toggle('mobile-open');
       elements.mobileNavToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
 
-    // Search input
     elements.exploreSearch.addEventListener('input', (e) => {
       state.searchQuery = e.target.value;
       elements.exploreSearchClear.style.display = state.searchQuery ? 'block' : 'none';
@@ -570,7 +772,6 @@
       renderExploreCards();
     });
 
-    // City & Sector Filters
     elements.filterCity.addEventListener('change', (e) => {
       state.filterCity = e.target.value;
       renderExploreCards();
@@ -590,55 +791,81 @@
       elements.filterSector.value = 'all';
       state.filterSector = 'all';
       renderExploreCards();
+      showToast('Filters reset to default view', '🔄');
     });
 
-    // Calculator Inputs (Real-time updates)
-    const calcInputs = [
-      elements.inputEmployees,
-      elements.inputSqft,
-      elements.inputBlrSalary,
-      elements.inputBlrRent,
-      elements.inputHydSalary,
-      elements.inputHydRent,
-      elements.inputPunSalary,
-      elements.inputPunRent
-    ];
+    // Sync sliders
+    setupRangeSync(elements.inputEmployees, elements.rangeEmployees);
+    setupRangeSync(elements.inputBlrSalary, elements.rangeBlrSalary);
+    setupRangeSync(elements.inputBlrRent, elements.rangeBlrRent);
+    setupRangeSync(elements.inputHydSalary, elements.rangeHydSalary);
+    setupRangeSync(elements.inputHydRent, elements.rangeHydRent);
+    setupRangeSync(elements.inputPunSalary, elements.rangePunSalary);
+    setupRangeSync(elements.inputPunRent, elements.rangePunRent);
 
-    calcInputs.forEach(input => {
-      input.addEventListener('input', updateScenarioCalculations);
-      input.addEventListener('change', updateScenarioCalculations);
+    elements.inputSqft.addEventListener('input', updateScenarioCalculations);
+
+    // Headcount Presets
+    elements.presetChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const size = Number(chip.getAttribute('data-size'));
+        elements.inputEmployees.value = size;
+        if (elements.rangeEmployees) elements.rangeEmployees.value = size;
+        elements.presetChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        updateScenarioCalculations();
+        showToast(`Headcount set to ${size} employees`, '👥');
+      });
     });
 
     elements.btnResetAssumptions.addEventListener('click', resetAssumptions);
 
-    // Shortlist actions
     elements.btnClearShortlist.addEventListener('click', () => {
       if (window.confirm('Clear all peer records from your shortlist?')) {
         window.GCC_STORAGE.clearShortlist();
+        showToast('Shortlist cleared', '🗑️');
       }
     });
 
-    elements.btnGotoExplore.addEventListener('click', () => {
-      switchView('explore');
-    });
+    elements.btnGotoExplore.addEventListener('click', () => switchView('explore'));
 
     elements.btnExportMd.addEventListener('click', () => triggerExport('md'));
     elements.btnExportTxt.addEventListener('click', () => triggerExport('txt'));
+    if (elements.btnPreviewBrief) {
+      elements.btnPreviewBrief.addEventListener('click', openBriefModal);
+    }
+
+    if (elements.btnCloseBriefModal) {
+      elements.btnCloseBriefModal.addEventListener('click', closeBriefModal);
+    }
+    if (elements.briefModalBackdrop) {
+      elements.briefModalBackdrop.addEventListener('click', (e) => {
+        if (e.target === elements.briefModalBackdrop) closeBriefModal();
+      });
+    }
+    if (elements.btnCopyBriefModal) {
+      elements.btnCopyBriefModal.addEventListener('click', () => {
+        if (elements.briefModalContent) {
+          navigator.clipboard.writeText(elements.briefModalContent.textContent).then(() => {
+            showToast('Decision Brief copied to clipboard!', '📋');
+          });
+        }
+      });
+    }
 
     // Drawer events
     elements.btnCloseDrawer.addEventListener('click', closeEvidenceDrawer);
     elements.drawerSecondaryClose.addEventListener('click', closeEvidenceDrawer);
-
     elements.drawerBackdrop.addEventListener('click', (e) => {
-      if (e.target === elements.drawerBackdrop) {
-        closeEvidenceDrawer();
-      }
+      if (e.target === elements.drawerBackdrop) closeEvidenceDrawer();
     });
 
     elements.drawerBtnToggleShortlist.addEventListener('click', () => {
       if (state.activeDrawerCompanyId) {
-        window.GCC_STORAGE.toggleSave(state.activeDrawerCompanyId);
+        const isNowSaved = window.GCC_STORAGE.toggleSave(state.activeDrawerCompanyId);
         updateDrawerShortlistButton();
+        const comp = window.GCC_DATA.companies.find(c => c.id === state.activeDrawerCompanyId);
+        showToast(isNowSaved ? `Added ${comp.name} to shortlist!` : `Removed ${comp.name} from shortlist`, isNowSaved ? '🔖' : '🗑️');
       }
     });
 
@@ -646,28 +873,31 @@
     elements.btnOpenTour.addEventListener('click', openTourModal);
     elements.btnCloseTour.addEventListener('click', closeTourModal);
     elements.tourModalBackdrop.addEventListener('click', (e) => {
-      if (e.target === elements.tourModalBackdrop) {
-        closeTourModal();
-      }
+      if (e.target === elements.tourModalBackdrop) closeTourModal();
     });
     elements.btnStartGuidedTour.addEventListener('click', () => {
       closeTourModal();
       switchView('explore');
       elements.exploreSearch.focus();
     });
+    if (elements.btnAutoDemo) {
+      elements.btnAutoDemo.addEventListener('click', runAutoDemo);
+    }
 
-    // Global Keyboard Listeners (Escape key handling)
+    // Escape Key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' || e.key === 'Esc') {
         if (elements.drawerBackdrop.classList.contains('open')) {
           closeEvidenceDrawer();
         } else if (elements.tourModalBackdrop.classList.contains('open')) {
           closeTourModal();
+        } else if (elements.briefModalBackdrop && elements.briefModalBackdrop.classList.contains('open')) {
+          closeBriefModal();
         }
       }
     });
 
-    // Storage subscriber for reactive updates across the entire app
+    // Storage subscriber
     window.GCC_STORAGE.subscribe((ids) => {
       elements.sidebarShortlistCount.textContent = ids.length;
       elements.sidebarShortlistCount.classList.toggle('has-items', ids.length > 0);
