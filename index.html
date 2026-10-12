@@ -12,7 +12,1531 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/styles.css">
+  <style>
+/* Inlined styles.css for 100% zero-404 reliability */
+/* GCC Atlas - Design System & Stylesheet
+   Style: Polished Editorial Research Workspace
+   Palette: Warm Off-White (#F7F8F2), Deep Forest Green (#153C35), Restrained Lime (#D8EF86)
+   Typography: Serif Headings (Newsreader / Georgia), Crisp Sans-Serif Body (Plus Jakarta Sans / Inter)
+*/
+
+:root {
+  --bg-app: #F7F8F2;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #FCFCFA;
+  --bg-surface-subtle: #F0F2EB;
+  --bg-surface-dark: #153C35;
+  
+  --text-main: #153C35;
+  --text-secondary: #3D5A53;
+  --text-muted: #5C756F;
+  --text-inverse: #F7F8F2;
+  
+  --accent-lime: #D8EF86;
+  --accent-lime-hover: #CBE670;
+  --accent-lime-subtle: #EEF8C8;
+  --accent-forest-light: #21554B;
+  
+  --border-light: #E0E5DC;
+  --border-strong: #C9D2C3;
+  --border-focus: #153C35;
+  
+  --badge-bg: #EAEFE4;
+  --badge-text: #153C35;
+  --badge-accent-bg: #E5F3B4;
+  --badge-accent-text: #193B2F;
+  --badge-warning-bg: #FEF3D6;
+  --badge-warning-text: #66460D;
+  
+  --font-serif: "Newsreader", "Merriweather", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", Consolas, Menlo, monospace;
+  
+  --shadow-subtle: 0 1px 3px rgba(21, 60, 53, 0.05);
+  --shadow-card: 0 2px 8px rgba(21, 60, 53, 0.06), 0 1px 2px rgba(21, 60, 53, 0.04);
+  --shadow-drawer: -4px 0 24px rgba(21, 60, 53, 0.15);
+  --shadow-modal: 0 12px 36px rgba(21, 60, 53, 0.2);
+  
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-pill: 9999px;
+  
+  --sidebar-width: 280px;
+  --header-height: 64px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  line-height: 1.5;
+}
+
+/* Accessibility & Focus */
+:focus-visible {
+  outline: 2px solid var(--text-main);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: 16px;
+  background: var(--text-main);
+  color: var(--bg-app);
+  padding: 8px 16px;
+  z-index: 9999;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+/* Typography */
+h1, h2, h3, h4, .serif-heading {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--text-main);
+}
+
+h1 { font-size: 1.85rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.1rem; }
+
+p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--text-main);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--accent-forest-light);
+}
+
+/* Base App Shell Layout */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Top Mobile Bar (hidden on desktop) */
+.mobile-top-bar {
+  display: none;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-light);
+  padding: 12px 16px;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.mobile-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-main);
+  text-decoration: none;
+}
+
+.mobile-nav-toggle {
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--text-main);
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Desktop Sidebar */
+.app-sidebar {
+  width: var(--sidebar-width);
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  flex-shrink: 0;
+  z-index: 90;
+}
+
+.sidebar-header {
+  padding: 24px 20px 18px 20px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.brand-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.brand-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-logo-mark {
+  width: 24px;
+  height: 24px;
+  background: var(--accent-lime);
+  border: 1.5px solid var(--text-main);
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+.brand-title {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-main);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+.brand-subtitle {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.brand-author-tag {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  background: var(--bg-surface-subtle);
+  padding: 3px 6px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+}
+
+/* Sidebar Nav */
+.sidebar-nav {
+  flex: 1;
+  padding: 16px 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-section-title {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  font-weight: 700;
+  padding: 8px 12px 4px 12px;
+}
+
+.nav-item-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.nav-item-btn:hover {
+  background: var(--bg-surface-subtle);
+  border-color: var(--border-light);
+}
+
+.nav-item-btn.active {
+  background: var(--bg-app);
+  color: var(--text-main);
+  font-weight: 600;
+  border-color: var(--border-strong);
+  box-shadow: inset 3px 0 0 var(--text-main);
+}
+
+.nav-item-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.85;
+}
+
+.nav-pill-count {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-surface-subtle);
+  color: var(--text-main);
+  border: 1px solid var(--border-light);
+}
+
+.nav-pill-count.has-items {
+  background: var(--accent-lime);
+  color: var(--text-main);
+  font-weight: 700;
+  border-color: #B5D254;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid var(--border-light);
+  background: var(--bg-surface-elevated);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.quick-tour-trigger {
+  width: 100%;
+  padding: 8px 10px;
+  background: var(--accent-lime);
+  border: 1px solid #B0CC48;
+  border-radius: var(--radius-md);
+  color: var(--text-main);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  transition: background 0.15s ease;
+}
+
+.quick-tour-trigger:hover {
+  background: var(--accent-lime-hover);
+}
+
+/* Main Content Area */
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow-y: auto;
+}
+
+/* Top Notification / Disclosures Banner */
+.context-banner {
+  background: var(--bg-surface-subtle);
+  border-bottom: 1px solid var(--border-light);
+  padding: 10px 24px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.context-banner-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.context-tag {
+  background: var(--text-main);
+  color: var(--accent-lime);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+}
+
+.content-viewport {
+  flex: 1;
+  padding: 28px 36px 48px 36px;
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* View Header */
+.view-header {
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.view-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.view-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.view-lead {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 780px;
+}
+
+.prototype-notice-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--badge-bg);
+  border: 1px solid var(--border-strong);
+  color: var(--text-main);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Action Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 16px;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  line-height: 1.2;
+}
+
+.btn-primary {
+  background: var(--text-main);
+  color: var(--bg-app);
+  border-color: var(--text-main);
+}
+
+.btn-primary:hover {
+  background: var(--accent-forest-light);
+  color: var(--bg-app);
+}
+
+.btn-accent {
+  background: var(--accent-lime);
+  color: var(--text-main);
+  border-color: #B5D254;
+}
+
+.btn-accent:hover {
+  background: var(--accent-lime-hover);
+}
+
+.btn-secondary {
+  background: var(--bg-surface);
+  color: var(--text-main);
+  border-color: var(--border-strong);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-surface-subtle);
+  border-color: var(--text-main);
+}
+
+.btn-sm {
+  padding: 6px 11px;
+  font-size: 0.8rem;
+}
+
+.btn-saved {
+  background: var(--accent-lime-subtle);
+  color: var(--text-main);
+  border-color: #A9CA3B;
+  font-weight: 700;
+}
+
+.btn-saved:hover {
+  background: #E2F2A5;
+}
+
+/* Cards & Grid */
+.editorial-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-subtle);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.editorial-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-card);
+}
+
+/* Explore View Controls */
+.filter-toolbar {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  width: 16px;
+  height: 16px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 36px 10px 36px;
+  background: var(--bg-app);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  color: var(--text-main);
+}
+
+.search-input:focus {
+  background: var(--bg-surface);
+  border-color: var(--text-main);
+}
+
+.search-clear-btn {
+  position: absolute;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 4px;
+}
+
+.filter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.filter-selects-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.filter-select {
+  padding: 6px 12px;
+  background: var(--bg-app);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+.filter-select:focus {
+  border-color: var(--text-main);
+}
+
+.filter-status-info {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* Company Grid & Cards */
+.companies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 20px;
+}
+
+.company-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  position: relative;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.company-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-card);
+}
+
+.company-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.company-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.company-name {
+  font-size: 1.25rem;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.company-parent {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.company-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  line-height: 1.2;
+}
+
+.badge-city {
+  background: var(--bg-surface-subtle);
+  color: var(--text-main);
+  border: 1px solid var(--border-light);
+}
+
+.badge-sector {
+  background: var(--badge-bg);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-light);
+}
+
+.badge-analyst {
+  background: var(--badge-warning-bg);
+  color: var(--badge-warning-text);
+  border: 1px solid #F5DFB3;
+}
+
+.badge-evidence {
+  background: #EBF5E9;
+  color: #175225;
+  border: 1px solid #CDE5CA;
+}
+
+.company-props-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-size: 0.85rem;
+}
+
+.prop-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px dashed var(--border-light);
+  padding-bottom: 4px;
+}
+
+.prop-key {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.prop-val {
+  color: var(--text-main);
+  font-weight: 600;
+  text-align: right;
+}
+
+.company-claim-excerpt {
+  background: var(--bg-app);
+  border-left: 3px solid var(--text-main);
+  padding: 10px 12px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+  line-height: 1.45;
+}
+
+.company-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-top: 1px solid var(--border-light);
+  padding-top: 14px;
+}
+
+/* Empty State */
+.empty-state-box {
+  background: var(--bg-surface);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: 48px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 540px;
+  margin: 40px auto;
+}
+
+.empty-state-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-surface-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+/* City Comparison View Layout */
+.comparison-layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.scenario-inputs-panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  position: sticky;
+  top: 80px;
+  box-shadow: var(--shadow-subtle);
+}
+
+.panel-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 12px;
+}
+
+.disclosure-callout {
+  background: var(--badge-warning-bg);
+  border: 1px solid #F3DFB0;
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  font-size: 0.78rem;
+  color: var(--badge-warning-text);
+  line-height: 1.4;
+  margin-bottom: 18px;
+}
+
+.input-section-title {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  font-weight: 700;
+  margin: 16px 0 10px 0;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.form-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.form-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.form-hint {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.input-with-affix {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--bg-app);
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+
+.input-with-affix:focus-within {
+  border-color: var(--text-main);
+  background: var(--bg-surface);
+}
+
+.affix-prefix, .affix-suffix {
+  padding: 8px 10px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  background: var(--bg-surface-subtle);
+  border: 0;
+  user-select: none;
+}
+
+.form-input {
+  flex: 1;
+  border: none;
+  padding: 8px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--text-main);
+  background: transparent;
+  min-width: 0;
+}
+
+.form-input:focus {
+  outline: none;
+}
+
+.input-error-msg {
+  font-size: 0.75rem;
+  color: #B42318;
+  display: none;
+}
+
+/* Comparison Results Panel */
+.comparison-results-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.results-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.city-cost-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-subtle);
+  position: relative;
+  transition: border-color 0.15s ease;
+}
+
+.city-cost-card.highlight-lowest {
+  border-color: #B2D250;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAFCF2 100%);
+}
+
+.city-cost-header {
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+}
+
+.city-cost-name {
+  font-size: 1.35rem;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.city-cost-tagline {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+  min-height: 32px;
+}
+
+.city-total-display {
+  margin-bottom: 16px;
+}
+
+.total-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.total-value-big {
+  font-size: 1.85rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+.cost-breakdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.8rem;
+  border-top: 1px dashed var(--border-light);
+  padding-top: 12px;
+  margin-bottom: 14px;
+}
+
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.breakdown-label {
+  color: var(--text-secondary);
+}
+
+.breakdown-val {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.city-qualitative-notes {
+  background: var(--bg-app);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* JLL Macro Data Card */
+.jll-macro-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+}
+
+.jll-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.jll-metric-box {
+  background: var(--bg-surface-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  text-align: center;
+}
+
+.jll-metric-city {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.jll-metric-val {
+  font-size: 1.45rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 4px 0;
+}
+
+.jll-metric-desc {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+
+.warning-callout-box {
+  background: #FCF7ED;
+  border-left: 3px solid #D9822B;
+  padding: 10px 14px;
+  font-size: 0.8rem;
+  color: #724213;
+  line-height: 1.45;
+}
+
+/* Service Providers View */
+.providers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+  gap: 24px;
+}
+
+.provider-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.provider-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.provider-focus {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.diligence-box {
+  background: var(--bg-surface-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.diligence-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+.diligence-body {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* Shortlist View */
+.shortlist-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  margin-bottom: 24px;
+}
+
+.shortlist-export-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Methodology View */
+.methodology-container {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 880px;
+}
+
+.methodology-section {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 26px;
+}
+
+.methodology-list {
+  margin-left: 20px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+}
+
+/* Evidence Drawer / Modal */
+.drawer-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(21, 60, 53, 0.45);
+  backdrop-filter: blur(2px);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: flex-end;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.drawer-backdrop.open {
+  display: flex;
+  opacity: 1;
+}
+
+.evidence-drawer {
+  background: var(--bg-surface);
+  width: 100%;
+  max-width: 580px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-drawer);
+  border-left: 1px solid var(--border-strong);
+  transform: translateX(100%);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+}
+
+.drawer-backdrop.open .evidence-drawer {
+  transform: translateX(0);
+}
+
+.drawer-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  background: var(--bg-surface);
+  z-index: 10;
+}
+
+.drawer-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.drawer-close-btn {
+  background: var(--bg-surface-subtle);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--text-main);
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.drawer-close-btn:hover {
+  background: var(--border-light);
+}
+
+.drawer-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.drawer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.drawer-section-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.audit-status-banner {
+  background: #EFF6EE;
+  border: 1px solid #C8E3C3;
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  font-size: 0.85rem;
+  color: #1A5425;
+  line-height: 1.45;
+}
+
+.sources-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.source-item-card {
+  background: var(--bg-app);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.source-link {
+  font-weight: 600;
+  font-size: 0.88rem;
+  word-break: break-all;
+}
+
+.source-date-tag {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.gaps-warning-box {
+  background: #FFF7EB;
+  border: 1px solid #FCDFB5;
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  font-size: 0.85rem;
+  color: #7D4913;
+  line-height: 1.45;
+}
+
+.drawer-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-light);
+  background: var(--bg-surface-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  position: sticky;
+  bottom: 0;
+}
+
+/* Reviewer Walkthrough Modal */
+.tour-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(21, 60, 53, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: 1050;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.tour-modal-backdrop.open {
+  display: flex;
+}
+
+.tour-modal {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-modal);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tour-step-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tour-step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--bg-app);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 12px;
+}
+
+.tour-step-badge {
+  background: var(--accent-lime);
+  color: var(--text-main);
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid #B0CC48;
+}
+
+.tour-step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tour-step-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.tour-step-desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* Subtle Global Footer */
+.app-footer {
+  border-top: 1px solid var(--border-light);
+  background: var(--bg-surface);
+  padding: 16px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.footer-author {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* Responsive Media Queries */
+@media (max-width: 992px) {
+  .app-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    box-shadow: var(--shadow-drawer);
+    z-index: 200;
+  }
+  
+  .app-sidebar.mobile-open {
+    transform: translateX(0);
+  }
+  
+  .mobile-top-bar {
+    display: flex;
+  }
+  
+  .content-viewport {
+    padding: 20px 20px 40px 20px;
+  }
+  
+  .comparison-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .scenario-inputs-panel {
+    position: static;
+  }
+  
+  .results-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .jll-metrics-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .providers-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-viewport {
+    padding: 16px 14px 36px 14px;
+  }
+  
+  .companies-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .filter-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .filter-selects-group {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filter-select {
+    width: 100%;
+  }
+  
+  .shortlist-top-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .shortlist-export-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .shortlist-export-actions .btn {
+    width: 100%;
+  }
+  
+  .evidence-drawer {
+    max-width: 100%;
+  }
+}
+
+</style>
 </head>
 <body>
   <!-- Accessible Skip Navigation -->
@@ -145,7 +1669,7 @@
           <!-- Search & Filter Controls -->
           <div class="filter-toolbar" role="search" aria-label="Filter company records">
             <div class="search-input-wrapper">
-              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
               <input type="search" id="explore-search" class="search-input" placeholder="Search company, parent, functions, or keywords (e.g., 'DBS', 'Retail', 'cloud')..." aria-label="Search companies by keyword">
               <button type="button" id="explore-search-clear" class="search-clear-btn" aria-label="Clear search input" style="display: none;">&times;</button>
             </div>
@@ -813,11 +2337,1296 @@
     </div>
   </div>
 
-  <!-- Scripts -->
-  <script src="js/data.js"></script>
-  <script src="js/storage.js"></script>
-  <script src="js/calculator.js"></script>
-  <script src="js/export.js"></script>
-  <script src="js/app.js"></script>
+  <!-- Inlined Scripts for guaranteed zero-404 delivery -->
+
+  <script>
+    // GCC Atlas Inlined Application Scripts
+    // GCC Atlas - Curated Dataset (Researched 12 October 2026)
+// Author: Andluru Sai Punith Reddy
+
+window.GCC_DATA = {
+  researchDate: '12 October 2026',
+  prototypeLabel: 'Curated four-record prototype, researched on 12 October 2026',
+  
+  companies: [
+    {
+      id: 'tesco-bengaluru',
+      name: 'Tesco Bengaluru',
+      parent: 'Tesco',
+      city: 'Bengaluru',
+      sector: 'Retail',
+      functions: 'Technology and business solutions',
+      functionsClassification: 'Company reported',
+      establishedYear: 2004,
+      establishedDisplay: '2004',
+      evidenceStatus: 'Company source supports this claim',
+      evidenceSummary: 'The company website describes its Bengaluru capability hub and states that it has operated there since 2004.',
+      sources: [
+        {
+          title: 'Tesco Bengaluru Official Capability Hub Site',
+          url: 'https://www.tescobengaluru.com/',
+          publicationDate: 'Undated current website',
+          isDated: false
+        }
+      ],
+      researchCheckDate: '12 October 2026',
+      unresolvedGaps: 'Current hiring capacity, compensation and legal-entity mapping are not verified.',
+      verificationNote: 'Primary company source supports operational presence and tenure. Financial compensation benchmarks, entity filings, and present workforce capacity remain unverified.'
+    },
+    {
+      id: 'lowes-india',
+      name: 'Lowe’s India',
+      parent: 'Lowe’s',
+      city: 'Bengaluru',
+      sector: 'Retail',
+      functions: 'Technology and retail operations',
+      functionsClassification: 'Analyst classification',
+      establishedYear: null,
+      establishedDisplay: 'Not verified',
+      evidenceStatus: 'Company source supports this claim',
+      evidenceSummary: 'The company lists an India office at Manyata Embassy Business Park in Bengaluru.',
+      sources: [
+        {
+          title: 'Lowe’s India - About Us / Office Locations',
+          url: 'https://lowes.co.in/about/',
+          publicationDate: 'Undated current website',
+          isDated: false
+        }
+      ],
+      researchCheckDate: '12 October 2026',
+      unresolvedGaps: 'Start year, current headcount and detailed function coverage need verification.',
+      verificationNote: 'Office location is supported by official corporate website. Start year, headcount breakdown, and functional scope are subject to analyst classification and require independent confirmation.'
+    },
+    {
+      id: 'dbs-tech-india',
+      name: 'DBS Tech India',
+      parent: 'DBS',
+      city: 'Hyderabad',
+      sector: 'Financial services',
+      functions: 'Engineering, cloud, data and AI',
+      functionsClassification: 'Company reported',
+      establishedYear: 2016,
+      establishedDisplay: '2016',
+      evidenceStatus: 'Company source supports this claim',
+      evidenceSummary: 'DBS’s current site describes its offshore technology centre and its 2016 establishment. The 20 July 2018 company release locates the hub in Hyderabad.',
+      sources: [
+        {
+          title: 'DBS Tech India Capability Centre Portal',
+          url: 'https://www.dbs.com/dbstechindia/index.html?linkId=100000401445764',
+          publicationDate: 'Undated current website',
+          isDated: false
+        },
+        {
+          title: 'DBS Corporate Media Release (Hyderabad Hub)',
+          url: 'https://www.dbs.com/gsmc-grp/NewsPrinter.page?locale=en&newsId=jy1w61zy',
+          publicationDate: '20 July 2018',
+          isDated: true
+        }
+      ],
+      researchCheckDate: '12 October 2026',
+      unresolvedGaps: 'Historical workforce milestones do not prove current staffing or hiring availability.',
+      verificationNote: 'Establishment year and Hyderabad locus are documented across official releases. Historical headcount milestones reflect past announcements rather than live engineering capacity.'
+    },
+    {
+      id: 'mastercard-tech-hub',
+      name: 'Mastercard Tech Hub',
+      parent: 'Mastercard',
+      city: 'Pune',
+      sector: 'Financial services',
+      functions: 'Software, cybersecurity and data architecture',
+      functionsClassification: 'Company reported',
+      establishedYear: 2014,
+      establishedDisplay: '2014 (First India Tech Hub)',
+      evidenceStatus: 'Company source supports this claim',
+      evidenceSummary: 'A 15 October 2024 company release announces a new Pune campus and states that the first India Tech Hub opened in Pune in 2014.',
+      sources: [
+        {
+          title: 'Mastercard Opens New State-of-the-Art Tech Hub in Pune, India',
+          url: 'https://newsroom.mastercard.com/news/ap/en/newsroom/press-releases/en/2024/mastercard-opens-new-state-of-the-art-tech-hub-in-pune-india/ ',
+          publicationDate: '15 October 2024',
+          isDated: true
+        }
+      ],
+      researchCheckDate: '12 October 2026',
+      unresolvedGaps: 'Announced campus capacity is not current audited headcount.',
+      verificationNote: 'Press release verifies campus opening and origin year (2014). Target facility capacity announced in press statements does not equal current audited employee headcount.'
+    }
+  ],
+
+  cityScenarios: {
+    sharedDefaults: {
+      employees: 100,
+      sqFtPerEmployee: 100
+    },
+    cities: [
+      {
+        id: 'bengaluru',
+        name: 'Bengaluru',
+        tagline: 'Established GCC Capital with deepest specialized talent pools',
+        defaultSalaryLakh: 24, // INR 24 Lakh / employee / year
+        defaultRentSqFt: 100,  // INR 100 / sq ft / month
+        jllLeasing2025: '24.1M sq ft',
+        jllLeasingNumber: 24.1,
+        pros: 'Deepest software engineering talent ecosystem, proven global peer density.',
+        considerations: 'Highest salary inflation and competitive recruitment friction.'
+      },
+      {
+        id: 'hyderabad',
+        name: 'Hyderabad',
+        tagline: 'High-velocity tech destination with modern Grade-A infrastructure',
+        defaultSalaryLakh: 22, // INR 22 Lakh / employee / year
+        defaultRentSqFt: 80,   // INR 80 / sq ft / month
+        jllLeasing2025: '11.7M sq ft',
+        jllLeasingNumber: 11.7,
+        pros: 'Favorable infrastructure planning, proactive regulatory single-window system.',
+        considerations: 'Secondary micro-markets have varying transit accessibility.'
+      },
+      {
+        id: 'pune',
+        name: 'Pune',
+        tagline: 'Manufacturing & financial tech corridor with stable retention',
+        defaultSalaryLakh: 21, // INR 21 Lakh / employee / year
+        defaultRentSqFt: 85,   // INR 85 / sq ft / month
+        jllLeasing2025: '8.1M sq ft',
+        jllLeasingNumber: 8.1,
+        pros: 'Proximity to Mumbai financial hub, strong university graduate pipeline.',
+        considerations: 'Smaller absolute pool of specialized cloud/AI senior architects.'
+      }
+    ],
+    jllSource: {
+      title: 'JLL India Office Market Report (Full-Year 2025)',
+      url: 'https://www.jll.com/en-in/newsroom/india-s-office-market-scales-unprecedented-highs-with-gross-leasing-activity-at-83-3-million-sq-ft-for-the-year-2025-jll',
+      metricLabel: '2025 Gross Commercial Office Leasing',
+      cautionLabel: 'Represents ALL office occupiers (domestic, third-party IT, BFSI), not exclusively GCCs, and does NOT indicate engineering talent-pool headcount.'
+    }
+  },
+
+  providers: [
+    {
+      id: 'ansr',
+      name: 'ANSR',
+      focusArea: 'GCC Design, Setup & End-to-End Operations',
+      scope: 'Full-lifecycle GCC establishment spanning entity setup, talent acquisition, workspace advisory, and operational handover under Build-Operate-Transfer (BOT) or joint models.',
+      sourceUrl: 'https://ansr.com/global-capability-center/',
+      evidenceStatus: 'Provider description, outcomes self-reported',
+      nextDiligenceSteps: 'Request two relevant mid-market client references with verified project delivery timelines and actual employee attrition rates.',
+      verificationNote: 'Scope reflects publicly marketed services on corporate portal. Commercial fees, SLA penalty clauses, and delivery milestones require prospective partner due diligence.'
+    },
+    {
+      id: 'jll-india',
+      name: 'JLL India',
+      focusArea: 'Commercial Workspace Selection, Design & Property Management',
+      scope: 'Commercial real estate advisory, Grade-A office site selection across Tier-1/Tier-2 micro-markets, lease transaction structuring, workplace fit-out design, and facilities operations.',
+      sourceUrl: 'https://www.jll.com/en-in/property-types/global-capability-centres',
+      evidenceStatus: 'Provider description, no independently checked delivery outcomes in this demo',
+      nextDiligenceSteps: 'Request current micro-market building availability quotes, standard commercial transaction fee schedules, and recent GCC client tenant references.',
+      verificationNote: 'Commercial lease metrics and micro-market availability vary by quarterly demand cycles. Direct RFPs are required for binding real estate proposals.'
+    }
+  ]
+};
+
+    // GCC Atlas - Resilient Local Storage Manager
+// Handles quota errors, corrupt JSON, disabled cookies, and multi-tab synchronization gracefully.
+
+(function (window) {
+  'use strict';
+
+  const STORAGE_KEY = 'gcc_atlas_shortlist';
+  const listeners = new Set();
+  let memoryFallback = [];
+  let storageAvailable = true;
+
+  // Test localStorage availability
+  try {
+    const testKey = '__gcc_storage_test__';
+    window.localStorage.setItem(testKey, '1');
+    window.localStorage.removeItem(testKey);
+    storageAvailable = true;
+  } catch (e) {
+    console.warn('[GCC Atlas] localStorage unavailable, falling back to in-memory state.', e);
+    storageAvailable = false;
+  }
+
+  function readStoredIds() {
+    if (!storageAvailable) {
+      return [...memoryFallback];
+    }
+    try {
+      const raw = window.localStorage.getItem(STORAGE_KEY);
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) {
+        return parsed.filter(id => typeof id === 'string');
+      }
+      console.warn('[GCC Atlas] Stored shortlist was not an array; resetting.');
+      writeStoredIds([]);
+      return [];
+    } catch (e) {
+      console.warn('[GCC Atlas] Corrupt localStorage data detected; resetting to empty.', e);
+      writeStoredIds([]);
+      return [];
+    }
+  }
+
+  function writeStoredIds(ids) {
+    const cleanIds = Array.from(new Set(ids.filter(id => typeof id === 'string')));
+    if (!storageAvailable) {
+      memoryFallback = cleanIds;
+      notifyListeners(cleanIds);
+      return;
+    }
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(cleanIds));
+    } catch (e) {
+      console.warn('[GCC Atlas] Failed writing to localStorage; using memory fallback.', e);
+      memoryFallback = cleanIds;
+    }
+    notifyListeners(cleanIds);
+  }
+
+  function notifyListeners(ids) {
+    listeners.forEach(fn => {
+      try {
+        fn(ids);
+      } catch (err) {
+        console.error('[GCC Atlas] Error in storage listener:', err);
+      }
+    });
+  }
+
+  // Window storage event for multi-tab sync
+  window.addEventListener('storage', (e) => {
+    if (e.key === STORAGE_KEY) {
+      notifyListeners(readStoredIds());
+    }
+  });
+
+  window.GCC_STORAGE = {
+    getShortlistIds() {
+      return readStoredIds();
+    },
+
+    isSaved(companyId) {
+      if (!companyId) return false;
+      const ids = readStoredIds();
+      return ids.includes(companyId);
+    },
+
+    add(companyId) {
+      if (!companyId) return;
+      const ids = readStoredIds();
+      if (!ids.includes(companyId)) {
+        ids.push(companyId);
+        writeStoredIds(ids);
+      }
+    },
+
+    remove(companyId) {
+      if (!companyId) return;
+      const ids = readStoredIds().filter(id => id !== companyId);
+      writeStoredIds(ids);
+    },
+
+    toggleSave(companyId) {
+      if (!companyId) return false;
+      const ids = readStoredIds();
+      const index = ids.indexOf(companyId);
+      let isNowSaved = false;
+      if (index === -1) {
+        ids.push(companyId);
+        isNowSaved = true;
+      } else {
+        ids.splice(index, 1);
+        isNowSaved = false;
+      }
+      writeStoredIds(ids);
+      return isNowSaved;
+    },
+
+    clearShortlist() {
+      writeStoredIds([]);
+    },
+
+    subscribe(callback) {
+      listeners.add(callback);
+      // Immediately call with current IDs
+      callback(readStoredIds());
+      return () => listeners.delete(callback);
+    }
+  };
+})(window);
+
+    // GCC Atlas - Deterministic Location Cost Scenario Calculator
+// Formula:
+//   Salary Total (Cr) = (employees * annualSalaryLakh) / 100
+//   Rent Total (Cr)   = (employees * sqFtPerEmployee * monthlyRent * 12) / 10,000,000
+//   Total Annual Cost = Salary Total + Rent Total
+
+(function (window) {
+  'use strict';
+
+  const DEFAULTS = {
+    employees: 100,
+    sqFtPerEmployee: 100,
+    cities: {
+      bengaluru: {
+        salaryLakh: 24,
+        monthlyRent: 100
+      },
+      hyderabad: {
+        salaryLakh: 22,
+        monthlyRent: 80
+      },
+      pune: {
+        salaryLakh: 21,
+        monthlyRent: 85
+      }
+    }
+  };
+
+  function sanitizeNumber(val, fallback = 0) {
+    if (val === null || val === undefined || val === '') return null;
+    const num = Number(val);
+    if (isNaN(num) || !isFinite(num) || num < 0) return null;
+    return num;
+  }
+
+  function calculateCityCost(employees, sqFtPerEmployee, salaryLakh, monthlyRent) {
+    const e = sanitizeNumber(employees, 0);
+    const sqFt = sanitizeNumber(sqFtPerEmployee, 0);
+    const sal = sanitizeNumber(salaryLakh, 0);
+    const rent = sanitizeNumber(monthlyRent, 0);
+
+    if (e === null || sqFt === null || sal === null || rent === null) {
+      return {
+        isValid: false,
+        salaryCrore: 0,
+        rentCrore: 0,
+        totalCrore: 0,
+        error: 'Please enter valid positive numbers for all parameters.'
+      };
+    }
+
+    // Salary: employees * (Lakh / 100) -> Crore
+    const salaryCrore = (e * sal) / 100;
+
+    // Rent: employees * sqFtPerEmployee * monthlyRent * 12 months / 10,000,000 (INR 1 Crore = 10^7 INR)
+    const annualRentInr = e * sqFt * rent * 12;
+    const rentCrore = annualRentInr / 10000000;
+
+    const totalCrore = salaryCrore + rentCrore;
+
+    return {
+      isValid: true,
+      employees: e,
+      sqFtPerEmployee: sqFt,
+      totalAreaSqFt: e * sqFt,
+      salaryLakh: sal,
+      monthlyRent: rent,
+      salaryCrore,
+      rentCrore,
+      totalCrore
+    };
+  }
+
+  function formatCrore(num) {
+    if (num === null || num === undefined || isNaN(num)) return '₹0.00 Cr';
+    return `₹${num.toFixed(2)} Cr`;
+  }
+
+  function formatLakh(num) {
+    if (num === null || num === undefined || isNaN(num)) return '₹0.00 Lakh';
+    return `₹${num.toFixed(1)} Lakh`;
+  }
+
+  function formatNumber(num) {
+    if (num === null || num === undefined || isNaN(num)) return '0';
+    return new Intl.NumberFormat('en-IN').format(num);
+  }
+
+  window.GCC_CALCULATOR = {
+    DEFAULTS,
+    sanitizeNumber,
+    calculateCityCost,
+    formatCrore,
+    formatLakh,
+    formatNumber
+  };
+})(window);
+
+    // GCC Atlas - Decision Brief Exporter
+// Generates and downloads an inspectable, formatted decision brief (Markdown / Plain Text)
+
+(function (window) {
+  'use strict';
+
+  function generateDecisionBriefMarkdown(options) {
+    const {
+      shortlistCompanies = [],
+      allCompanies = [],
+      scenarioInputs = {},
+      costResults = {},
+      exportDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+    } = options;
+
+    const companiesToInclude = shortlistCompanies.length > 0 ? shortlistCompanies : allCompanies;
+    const isShortlistFiltered = shortlistCompanies.length > 0;
+
+    const { employees = 100, sqFtPerEmployee = 100 } = scenarioInputs;
+    const totalArea = employees * sqFtPerEmployee;
+
+    let md = '';
+
+    md += `# GCC ATLAS — INDIA EXPANSION LOCATION SHORTLIST DECISION BRIEF\n\n`;
+    md += `**Document Purpose:** Defensible location selection brief for executive leadership\n`;
+    md += `**Target Profile:** Global mid-market enterprise establishing 50–200 person engineering / data capability hub\n`;
+    md += `**Author / Analyst:** Andluru Sai Punith Reddy (Flexiple Product Intern Assignment)\n`;
+    md += `**Date of Generation:** ${exportDate}\n`;
+    md += `**Research Check Date:** 12 October 2026\n`;
+    md += `**Methodology Boundary:** Curated prototype analysis; deterministic scenario model\n\n`;
+    md += `---\n\n`;
+
+    md += `## 1. EXECUTIVE SUMMARY & CONTEXT\n\n`;
+    md += `A first-time India capability hub expansion requires a defensible shortlist of 2–3 candidate cities before entering commercial broker or setup partner negotiations. This brief synthesizes:\n`;
+    md += `1. **Peer Footprints:** Primary corporate evidence for peer GCCs in target sectors (Retail & Financial Services).\n`;
+    md += `2. **Deterministic Cost Scenario:** Salary and base office rent baseline for a ${employees}-seat initial team (${totalArea.toLocaleString('en-IN')} sq ft).\n`;
+    md += `3. **Commercial Real Estate Depth:** JLL FY2025 macro leasing context across candidate micro-markets.\n`;
+    md += `4. **Next Diligence Directives:** Concrete audit questions for legal entity mapping, recruitment, and service providers.\n\n`;
+
+    md += `> **CRITICAL SELECTION PRINCIPLE:**\n`;
+    md += `> Do **not** treat the lowest-cost city as the default recommendation. Cost differentials are frequently offset by hiring velocity, specialized domain depth (e.g. AI/platform architects), and senior site-leader availability.\n\n`;
+
+    md += `## 2. PEER FOOTPRINTS & INSPECTABLE EVIDENCE\n\n`;
+    if (!isShortlistFiltered) {
+      md += `*Note: No custom shortlist was filtered; presenting the full 4 curated prototype records researched on 12 October 2026.*\n\n`;
+    } else {
+      md += `*Displaying ${shortlistCompanies.length} peer record(s) explicitly saved to the candidate shortlist:*\n\n`;
+    }
+
+    companiesToInclude.forEach((c, idx) => {
+      md += `### ${idx + 1}. ${c.name} (${c.city})\n`;
+      md += `- **Global Parent:** ${c.parent}\n`;
+      md += `- **City Location:** ${c.city}\n`;
+      md += `- **Sector:** ${c.sector}\n`;
+      md += `- **Functions:** ${c.functions} *(${c.functionsClassification || 'Company reported'})*\n`;
+      md += `- **Established Year:** ${c.establishedDisplay || c.establishedYear || 'Not verified'}\n`;
+      md += `- **Evidence Status:** ${c.evidenceStatus}\n`;
+      md += `- **Primary Claim:** ${c.evidenceSummary}\n`;
+      md += `- **Sources:**\n`;
+      c.sources.forEach(s => {
+        md += `  - [${s.title}](${s.url}) — *Publication Date: ${s.publicationDate}*\n`;
+      });
+      md += `- **Research-Check Date:** ${c.researchCheckDate}\n`;
+      md += `- **Unresolved Diligence Gaps:** ⚠️ *${c.unresolvedGaps}*\n\n`;
+    });
+
+    md += `## 3. LOCATION COST SCENARIO MODEL (SALARY + BASE RENT)\n\n`;
+    md += `### 3.1 Model Assumptions & Shared Parameters\n`;
+    md += `- **Target Headcount:** ${employees} employees\n`;
+    md += `- **Workspace Allocation:** ${sqFtPerEmployee} sq ft per employee (Total requirement: ${totalArea.toLocaleString('en-IN')} sq ft)\n`;
+    md += `- **Calculation Period:** Annual (12 months)\n`;
+    md += `- **Formula:**\n`;
+    md += `  \`\`\`text\n`;
+    md += `  Annual Total (INR Crore) =\n`;
+    md += `    [Employees × Annual Salary (Lakh) / 100] +\n`;
+    md += `    [Employees × SqFt per Employee × Monthly Rent (INR) × 12 / 10,000,000]\n`;
+    md += `  \`\`\`\n\n`;
+
+    md += `### 3.2 City Comparison Table\n\n`;
+    md += `| City | Assumed Salary (Lakh/Yr) | Assumed Rent (₹/sq ft/mo) | Annual Salary (₹ Cr) | Annual Base Rent (₹ Cr) | Total Annual Cost (₹ Cr) |\n`;
+    md += `| :--- | :--- | :--- | :--- | :--- | :--- |\n`;
+
+    const cityKeys = ['bengaluru', 'hyderabad', 'pune'];
+    cityKeys.forEach(cityKey => {
+      const city = costResults[cityKey];
+      if (city) {
+        md += `| **${city.name}** | ₹${city.salaryLakh} Lakh | ₹${city.monthlyRent}/sq ft | ₹${city.salaryCrore.toFixed(2)} Cr | ₹${city.rentCrore.toFixed(2)} Cr | **₹${city.totalCrore.toFixed(2)} Cr** |\n`;
+      }
+    });
+
+    md += `\n`;
+    md += `### 3.3 Explicit Model Disclosures & Exclusions\n`;
+    md += `- **DISCLOSURE:** All salary and rental figures above are **ILLUSTRATIVE ASSUMPTIONS**, not sourced compensation benchmarks or verified landlord quotations.\n`;
+    md += `- **COVERAGE:** Model includes strictly gross annual employee compensation and bare-shell / warm-shell base office lease.\n`;
+    md += `- **EXCLUDED COSTS (Mandatory HQ Budget Additions):**\n`;
+    md += `  1. Mandatory statutory benefits (Provident Fund 12%, Gratuity ~4.81%, ESIC, medical insurance).\n`;
+    md += `  2. Capital expenditure / interior fit-out (typically ₹3,500 – ₹5,500 per sq ft amortized over 3–5 years).\n`;
+    md += `  3. Corporate entity establishment, GST registration, transfer pricing compliance, and statutory audit.\n`;
+    md += `  4. Executive recruiting / agency fees (typically 15% – 20% of first-year CTC per hired lead).\n`;
+    md += `  5. High-spec IT infrastructure, redundant internet links, and compliance monitoring.\n`;
+    md += `  6. State industrial policies and potential IT/ITES subsidies (varies across Karnataka, Telangana, and Maharashtra).\n\n`;
+
+    md += `## 4. COMMERCIAL REAL ESTATE MACRO CONTEXT\n\n`;
+    md += `Gross commercial office leasing activity across target markets (Full-Year 2025, per JLL India Research):\n`;
+    md += `- **Bengaluru:** 24.1 million sq ft gross leasing (India's highest single-city leasing volume)\n`;
+    md += `- **Hyderabad:** 11.7 million sq ft gross leasing (Continued expansion in HITEC City / Financial District)\n`;
+    md += `- **Pune:** 8.1 million sq ft gross leasing (Robust absorption in Kharadi and Hinjawadi corridors)\n\n`;
+    md += `*Source:* [JLL India 2025 Office Market Report](https://www.jll.com/en-in/newsroom/india-s-office-market-scales-unprecedented-highs-with-gross-leasing-activity-at-83-3-million-sq-ft-for-the-year-2025-jll)\n`;
+    md += `> **Cautionary Note:** This JLL figure measures **ALL** commercial office occupiers (including IT services, domestic banking, and manufacturing), not exclusively GCCs, and must not be used as an indicator of engineering talent pool size.\n\n`;
+
+    md += `## 5. SERVICE PROVIDER SCOPE & DILIGENCE CHECKLIST\n\n`;
+    md += `### 1. ANSR (GCC Design, Setup & Operations)\n`;
+    md += `- **Service Scope:** Full-cycle GCC setup spanning talent acquisition, workspace advisory, and operational handover.\n`;
+    md += `- **Evidence Status:** Provider description; operational outcomes self-reported.\n`;
+    md += `- **Source:** [https://ansr.com/global-capability-center/](https://ansr.com/global-capability-center/)\n`;
+    md += `- **Diligence Directives:** Request two relevant mid-market client references with verified project delivery timelines and actual employee attrition rates.\n\n`;
+
+    md += `### 2. JLL India (Commercial Real Estate & Project Management)\n`;
+    md += `- **Service Scope:** Site evaluation, commercial leasing, workplace design, and facilities management.\n`;
+    md += `- **Evidence Status:** Provider description; no independently checked delivery outcomes in this prototype.\n`;
+    md += `- **Source:** [https://www.jll.com/en-in/property-types/global-capability-centres](https://www.jll.com/en-in/property-types/global-capability-centres)\n`;
+    md += `- **Diligence Directives:** Request current micro-market building availability quotes, standard commercial transaction fee schedules, and recent GCC client tenant references.\n\n`;
+
+    md += `## 6. RECOMMENDED HEADQUARTERS ACTION PLAN\n\n`;
+    md += `| Milestone | Horizon | Key Deliverables |\n`;
+    md += `| :--- | :--- | :--- |\n`;
+    md += `| **Phase 1: Location Downselect** | Weeks 1–3 | Downselect from 3 candidate cities to top 2 based on domain talent availability rather than nominal rent. |\n`;
+    md += `| **Phase 2: Legal Entity Structuring** | Weeks 4–6 | Form India Private Limited subsidiary; establish transfer pricing agreement and board structure. |\n`;
+    md += `| **Phase 3: Real Estate Inspection** | Weeks 7–9 | Inspect managed office / co-working options (e.g. 6-12 month bridge) vs permanent lease. |\n`;
+    md += `| **Phase 4: Site Leader Recruitment** | Weeks 8–12 | Hire India Managing Director / Site Head before committing to broad hiring campaigns. |\n\n`;
+
+    md += `---\n`;
+    md += `*Exported from GCC Atlas Prototype (Author: Andluru Sai Punith Reddy) on ${exportDate}*\n`;
+    md += `*Methodology: Browser-local deterministic prototype. No live LLM or generative AI was executed to produce these figures.*\n`;
+
+    return md;
+  }
+
+  function downloadFile(content, fileName, mimeType) {
+    const blob = new Blob([content], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    setTimeout(() => {
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }, 200);
+  }
+
+  function exportDecisionBrief(options, format = 'md') {
+    const markdown = generateDecisionBriefMarkdown(options);
+    const dateSlug = new Date().toISOString().slice(0, 10);
+    
+    if (format === 'txt') {
+      const text = markdown
+        .replace(/#+\s/g, '')
+        .replace(/\*\*([^*]+)\*\*/g, '$1')
+        .replace(/\*([^*]+)\*/g, '$1')
+        .replace(/`([^`]+)`/g, '$1')
+        .replace(/>\s/g, '  ');
+      downloadFile(text, `GCC_Atlas_Decision_Brief_${dateSlug}.txt`, 'text/plain;charset=utf-8');
+    } else {
+      downloadFile(markdown, `GCC_Atlas_Decision_Brief_${dateSlug}.md`, 'text/markdown;charset=utf-8');
+    }
+  }
+
+  window.GCC_EXPORTER = {
+    generateDecisionBriefMarkdown,
+    exportDecisionBrief
+  };
+})(window);
+
+    // GCC Atlas - Application Controller
+// Author: Andluru Sai Punith Reddy
+
+(function (window, document) {
+  'use strict';
+
+  // State
+  const state = {
+    currentView: 'explore',
+    searchQuery: '',
+    filterCity: 'all',
+    filterSector: 'all',
+    activeDrawerCompanyId: null,
+    lastFocusedElement: null,
+    scenario: {
+      employees: 100,
+      sqFtPerEmployee: 100,
+      bengaluru: { salaryLakh: 24, monthlyRent: 100 },
+      hyderabad: { salaryLakh: 22, monthlyRent: 80 },
+      pune: { salaryLakh: 21, monthlyRent: 85 }
+    },
+    costResults: {}
+  };
+
+  // DOM Elements Cache
+  const elements = {
+    // Nav
+    navButtons: document.querySelectorAll('.nav-item-btn'),
+    viewPanels: document.querySelectorAll('.app-view-panel'),
+    mobileNavToggle: document.getElementById('mobile-nav-toggle'),
+    appSidebar: document.getElementById('app-sidebar'),
+    sidebarExploreCount: document.getElementById('sidebar-explore-count'),
+    sidebarShortlistCount: document.getElementById('sidebar-shortlist-count'),
+
+    // Explore
+    exploreSearch: document.getElementById('explore-search'),
+    exploreSearchClear: document.getElementById('explore-search-clear'),
+    filterCity: document.getElementById('filter-city'),
+    filterSector: document.getElementById('filter-sector'),
+    exploreCountStatus: document.getElementById('explore-count-status'),
+    exploreCompaniesContainer: document.getElementById('explore-companies-container'),
+    exploreEmptyState: document.getElementById('explore-empty-state'),
+    btnResetFilters: document.getElementById('btn-reset-filters'),
+
+    // Calculator inputs
+    inputEmployees: document.getElementById('input-employees'),
+    inputSqft: document.getElementById('input-sqft'),
+    inputBlrSalary: document.getElementById('input-blr-salary'),
+    inputBlrRent: document.getElementById('input-blr-rent'),
+    inputHydSalary: document.getElementById('input-hyd-salary'),
+    inputHydRent: document.getElementById('input-hyd-rent'),
+    inputPunSalary: document.getElementById('input-pun-salary'),
+    inputPunRent: document.getElementById('input-pun-rent'),
+    btnResetAssumptions: document.getElementById('btn-reset-assumptions'),
+
+    // Calculator outputs
+    valTotalBlr: document.getElementById('val-total-blr'),
+    valSalaryBlr: document.getElementById('val-salary-blr'),
+    valRentBlr: document.getElementById('val-rent-blr'),
+    valAreaBlr: document.getElementById('val-area-blr'),
+
+    valTotalHyd: document.getElementById('val-total-hyd'),
+    valSalaryHyd: document.getElementById('val-salary-hyd'),
+    valRentHyd: document.getElementById('val-rent-hyd'),
+    valAreaHyd: document.getElementById('val-area-hyd'),
+
+    valTotalPun: document.getElementById('val-total-pun'),
+    valSalaryPun: document.getElementById('val-salary-pun'),
+    valRentPun: document.getElementById('val-rent-pun'),
+    valAreaPun: document.getElementById('val-area-pun'),
+
+    cardCostBlr: document.getElementById('card-cost-bengaluru'),
+    cardCostHyd: document.getElementById('card-cost-hyderabad'),
+    cardCostPun: document.getElementById('card-cost-pune'),
+
+    // Shortlist
+    shortlistStatusHeading: document.getElementById('shortlist-status-heading'),
+    shortlistCompaniesContainer: document.getElementById('shortlist-companies-container'),
+    shortlistEmptyState: document.getElementById('shortlist-empty-state'),
+    btnClearShortlist: document.getElementById('btn-clear-shortlist'),
+    btnGotoExplore: document.getElementById('btn-goto-explore'),
+    btnExportMd: document.getElementById('btn-export-md'),
+    btnExportTxt: document.getElementById('btn-export-txt'),
+
+    // Evidence Drawer
+    drawerBackdrop: document.getElementById('evidence-drawer-backdrop'),
+    btnCloseDrawer: document.getElementById('btn-close-drawer'),
+    drawerSecondaryClose: document.getElementById('drawer-secondary-close'),
+    drawerCityBadge: document.getElementById('drawer-city-badge'),
+    drawerCompanyName: document.getElementById('drawer-company-name'),
+    drawerParentLabel: document.getElementById('drawer-parent-label'),
+    drawerStatusTitle: document.getElementById('drawer-status-title'),
+    drawerStatusNote: document.getElementById('drawer-status-note'),
+    drawerClaimSummary: document.getElementById('drawer-claim-summary'),
+    drawerPropSector: document.getElementById('drawer-prop-sector'),
+    drawerPropFunctions: document.getElementById('drawer-prop-functions'),
+    drawerPropClassification: document.getElementById('drawer-prop-classification'),
+    drawerPropEstablished: document.getElementById('drawer-prop-established'),
+    drawerPropChecked: document.getElementById('drawer-prop-checked'),
+    drawerSourcesContainer: document.getElementById('drawer-sources-container'),
+    drawerGapsText: document.getElementById('drawer-gaps-text'),
+    drawerBtnToggleShortlist: document.getElementById('drawer-btn-toggle-shortlist'),
+    drawerShortlistActionText: document.getElementById('drawer-shortlist-action-text'),
+
+    // Tour modal
+    tourModalBackdrop: document.getElementById('tour-modal-backdrop'),
+    btnOpenTour: document.getElementById('btn-open-tour'),
+    btnCloseTour: document.getElementById('btn-close-tour'),
+    btnStartGuidedTour: document.getElementById('btn-start-guided-tour')
+  };
+
+  // Helper: Escape HTML
+  function escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  // Navigation Logic
+  function switchView(targetViewId) {
+    state.currentView = targetViewId;
+
+    elements.navButtons.forEach(btn => {
+      const isTarget = btn.getAttribute('data-view') === targetViewId;
+      btn.classList.toggle('active', isTarget);
+      if (isTarget) {
+        btn.setAttribute('aria-current', 'page');
+      } else {
+        btn.removeAttribute('aria-current');
+      }
+    });
+
+    elements.viewPanels.forEach(panel => {
+      const isPanel = panel.id === `view-${targetViewId}`;
+      panel.style.display = isPanel ? 'block' : 'none';
+    });
+
+    // Close mobile nav drawer if open
+    if (elements.appSidebar.classList.contains('mobile-open')) {
+      elements.appSidebar.classList.remove('mobile-open');
+      elements.mobileNavToggle.setAttribute('aria-expanded', 'false');
+    }
+
+    // Scroll to top of viewport
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Refresh view specific components
+    if (targetViewId === 'shortlist') {
+      renderShortlistView();
+    } else if (targetViewId === 'explore') {
+      renderExploreCards();
+    }
+  }
+
+  // Filter & Search Logic
+  function getFilteredCompanies() {
+    const query = state.searchQuery.trim().toLowerCase();
+    const city = state.filterCity;
+    const sector = state.filterSector;
+
+    return window.GCC_DATA.companies.filter(c => {
+      const matchesCity = city === 'all' || c.city.toLowerCase() === city.toLowerCase();
+      const matchesSector = sector === 'all' || c.sector.toLowerCase() === sector.toLowerCase();
+
+      if (!matchesCity || !matchesSector) return false;
+      if (!query) return true;
+
+      const searchableText = [
+        c.name,
+        c.parent,
+        c.city,
+        c.sector,
+        c.functions,
+        c.evidenceSummary,
+        c.unresolvedGaps,
+        c.establishedDisplay
+      ].join(' ').toLowerCase();
+
+      return searchableText.includes(query);
+    });
+  }
+
+  // Render Explore View Cards
+  function renderExploreCards() {
+    const filtered = getFilteredCompanies();
+    const totalCount = window.GCC_DATA.companies.length;
+    const container = elements.exploreCompaniesContainer;
+
+    elements.exploreCountStatus.textContent = `Showing ${filtered.length} of ${totalCount} records`;
+    elements.sidebarExploreCount.textContent = totalCount;
+
+    if (filtered.length === 0) {
+      container.innerHTML = '';
+      elements.exploreEmptyState.style.display = 'flex';
+      return;
+    }
+
+    elements.exploreEmptyState.style.display = 'none';
+
+    container.innerHTML = filtered.map(c => {
+      const isSaved = window.GCC_STORAGE.isSaved(c.id);
+      const isAnalyst = c.functionsClassification === 'Analyst classification';
+      const sourceDate = c.sources[0]?.publicationDate || 'Undated';
+
+      return `
+        <article class="company-card" data-id="${c.id}" aria-labelledby="comp-title-${c.id}">
+          <div>
+            <div class="company-card-header">
+              <div class="company-title-wrap">
+                <h2 id="comp-title-${c.id}" class="company-name">${escapeHtml(c.name)}</h2>
+                <span class="company-parent">Global Parent: ${escapeHtml(c.parent)}</span>
+              </div>
+              <span class="badge badge-city">${escapeHtml(c.city)}</span>
+            </div>
+
+            <div class="company-badges-row">
+              <span class="badge badge-sector">${escapeHtml(c.sector)}</span>
+              ${isAnalyst ? '<span class="badge badge-analyst">Analyst classification</span>' : ''}
+              <span class="badge badge-evidence">Source Verified</span>
+            </div>
+
+            <div class="company-props-list">
+              <div class="prop-row">
+                <span class="prop-key">Verified Functions:</span>
+                <span class="prop-val">${escapeHtml(c.functions)}</span>
+              </div>
+              <div class="prop-row">
+                <span class="prop-key">Established Year:</span>
+                <span class="prop-val">${escapeHtml(c.establishedDisplay)}</span>
+              </div>
+              <div class="prop-row">
+                <span class="prop-key">Primary Source Date:</span>
+                <span class="prop-val">${escapeHtml(sourceDate)}</span>
+              </div>
+            </div>
+
+            <div class="company-claim-excerpt" title="Evidence claim from primary corporate source">
+              ${escapeHtml(c.evidenceSummary)}
+            </div>
+          </div>
+
+          <div class="company-card-actions">
+            <button type="button" class="btn btn-secondary btn-sm btn-inspect-evidence" data-id="${c.id}" aria-label="Inspect evidence and sources for ${escapeHtml(c.name)}">
+              <span>Inspect Evidence</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
+            </button>
+            <button type="button" class="btn btn-sm ${isSaved ? 'btn-saved' : 'btn-accent'} btn-toggle-shortlist" data-id="${c.id}" aria-label="${isSaved ? 'Remove from shortlist' : 'Save to shortlist'}">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+              <span>${isSaved ? 'Saved in Shortlist' : 'Save to Shortlist'}</span>
+            </button>
+          </div>
+        </article>
+      `;
+    }).join('');
+
+    // Attach card event listeners
+    container.querySelectorAll('.btn-inspect-evidence').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = btn.getAttribute('data-id');
+        openEvidenceDrawer(id, btn);
+      });
+    });
+
+    container.querySelectorAll('.btn-toggle-shortlist').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = btn.getAttribute('data-id');
+        window.GCC_STORAGE.toggleSave(id);
+      });
+    });
+  }
+
+  // Evidence Drawer Controller
+  function openEvidenceDrawer(companyId, triggerElement) {
+    const company = window.GCC_DATA.companies.find(c => c.id === companyId);
+    if (!company) return;
+
+    state.activeDrawerCompanyId = companyId;
+    state.lastFocusedElement = triggerElement || document.activeElement;
+
+    // Populate drawer elements
+    elements.drawerCompanyName.textContent = company.name;
+    elements.drawerParentLabel.textContent = `Global Parent: ${company.parent}`;
+    elements.drawerCityBadge.textContent = company.city;
+    elements.drawerClaimSummary.textContent = company.evidenceSummary;
+    elements.drawerStatusTitle.textContent = company.evidenceStatus;
+    elements.drawerStatusNote.textContent = company.verificationNote || 'Primary source supports presence. Headcount and compensation require direct audit.';
+
+    elements.drawerPropSector.textContent = company.sector;
+    elements.drawerPropFunctions.textContent = company.functions;
+    elements.drawerPropClassification.textContent = company.functionsClassification || 'Company reported';
+    elements.drawerPropEstablished.textContent = company.establishedDisplay;
+    elements.drawerPropChecked.textContent = company.researchCheckDate;
+    elements.drawerGapsText.textContent = company.unresolvedGaps;
+
+    // Render Sources with safe attributes
+    elements.drawerSourcesContainer.innerHTML = company.sources.map(s => `
+      <div class="source-item-card">
+        <a href="${escapeHtml(s.url)}" target="_blank" rel="noopener noreferrer" class="source-link" aria-label="Open source in new window: ${escapeHtml(s.title)}">
+          ${escapeHtml(s.title)} ↗
+        </a>
+        <span class="source-date-tag">
+          Publication Date: <strong>${escapeHtml(s.publicationDate)}</strong>
+          ${s.isDated ? '' : ' <em>(Undated primary website)</em>'}
+        </span>
+      </div>
+    `).join('');
+
+    // Update shortlist button in drawer
+    updateDrawerShortlistButton();
+
+    // Show drawer
+    elements.drawerBackdrop.classList.add('open');
+    elements.drawerBackdrop.setAttribute('aria-hidden', 'false');
+    elements.btnCloseDrawer.focus();
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeEvidenceDrawer() {
+    elements.drawerBackdrop.classList.remove('open');
+    elements.drawerBackdrop.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    state.activeDrawerCompanyId = null;
+
+    // Restore focus
+    if (state.lastFocusedElement && typeof state.lastFocusedElement.focus === 'function') {
+      state.lastFocusedElement.focus();
+    }
+  }
+
+  function updateDrawerShortlistButton() {
+    if (!state.activeDrawerCompanyId) return;
+    const isSaved = window.GCC_STORAGE.isSaved(state.activeDrawerCompanyId);
+    elements.drawerShortlistActionText.textContent = isSaved ? 'Remove from Shortlist' : 'Save to Shortlist';
+    elements.drawerBtnToggleShortlist.className = isSaved ? 'btn btn-secondary btn-sm' : 'btn btn-accent btn-sm';
+  }
+
+  // Cost Scenario Calculator Wiring
+  function updateScenarioCalculations() {
+    const employees = Number(elements.inputEmployees.value) || 0;
+    const sqFtPerEmployee = Number(elements.inputSqft.value) || 0;
+
+    const blrSalary = Number(elements.inputBlrSalary.value) || 0;
+    const blrRent = Number(elements.inputBlrRent.value) || 0;
+
+    const hydSalary = Number(elements.inputHydSalary.value) || 0;
+    const hydRent = Number(elements.inputHydRent.value) || 0;
+
+    const punSalary = Number(elements.inputPunSalary.value) || 0;
+    const punRent = Number(elements.inputPunRent.value) || 0;
+
+    // Store in state
+    state.scenario = {
+      employees,
+      sqFtPerEmployee,
+      bengaluru: { salaryLakh: blrSalary, monthlyRent: blrRent },
+      hyderabad: { salaryLakh: hydSalary, monthlyRent: hydRent },
+      pune: { salaryLakh: punSalary, monthlyRent: punRent }
+    };
+
+    // Calculate costs
+    const calcBlr = window.GCC_CALCULATOR.calculateCityCost(employees, sqFtPerEmployee, blrSalary, blrRent);
+    const calcHyd = window.GCC_CALCULATOR.calculateCityCost(employees, sqFtPerEmployee, hydSalary, hydRent);
+    const calcPun = window.GCC_CALCULATOR.calculateCityCost(employees, sqFtPerEmployee, punSalary, punRent);
+
+    state.costResults = {
+      bengaluru: { ...calcBlr, name: 'Bengaluru' },
+      hyderabad: { ...calcHyd, name: 'Hyderabad' },
+      pune: { ...calcPun, name: 'Pune' }
+    };
+
+    // Render Bengaluru
+    elements.valTotalBlr.textContent = window.GCC_CALCULATOR.formatCrore(calcBlr.totalCrore);
+    elements.valSalaryBlr.textContent = window.GCC_CALCULATOR.formatCrore(calcBlr.salaryCrore);
+    elements.valRentBlr.textContent = window.GCC_CALCULATOR.formatCrore(calcBlr.rentCrore);
+    elements.valAreaBlr.textContent = `${window.GCC_CALCULATOR.formatNumber(calcBlr.totalAreaSqFt)} sq ft`;
+
+    // Render Hyderabad
+    elements.valTotalHyd.textContent = window.GCC_CALCULATOR.formatCrore(calcHyd.totalCrore);
+    elements.valSalaryHyd.textContent = window.GCC_CALCULATOR.formatCrore(calcHyd.salaryCrore);
+    elements.valRentHyd.textContent = window.GCC_CALCULATOR.formatCrore(calcHyd.rentCrore);
+    elements.valAreaHyd.textContent = `${window.GCC_CALCULATOR.formatNumber(calcHyd.totalAreaSqFt)} sq ft`;
+
+    // Render Pune
+    elements.valTotalPun.textContent = window.GCC_CALCULATOR.formatCrore(calcPun.totalCrore);
+    elements.valSalaryPun.textContent = window.GCC_CALCULATOR.formatCrore(calcPun.salaryCrore);
+    elements.valRentPun.textContent = window.GCC_CALCULATOR.formatCrore(calcPun.rentCrore);
+    elements.valAreaPun.textContent = `${window.GCC_CALCULATOR.formatNumber(calcPun.totalAreaSqFt)} sq ft`;
+
+    // Highlight lowest cost card
+    const totals = [
+      { key: 'bengaluru', el: elements.cardCostBlr, total: calcBlr.totalCrore },
+      { key: 'hyderabad', el: elements.cardCostHyd, total: calcHyd.totalCrore },
+      { key: 'pune', el: elements.cardCostPun, total: calcPun.totalCrore }
+    ];
+    const lowest = totals.reduce((min, curr) => curr.total < min.total ? curr : min, totals[0]);
+
+    totals.forEach(t => {
+      t.el.classList.toggle('highlight-lowest', t.key === lowest.key);
+    });
+  }
+
+  function resetAssumptions() {
+    const def = window.GCC_CALCULATOR.DEFAULTS;
+    elements.inputEmployees.value = def.employees;
+    elements.inputSqft.value = def.sqFtPerEmployee;
+
+    elements.inputBlrSalary.value = def.cities.bengaluru.salaryLakh;
+    elements.inputBlrRent.value = def.cities.bengaluru.monthlyRent;
+
+    elements.inputHydSalary.value = def.cities.hyderabad.salaryLakh;
+    elements.inputHydRent.value = def.cities.hyderabad.monthlyRent;
+
+    elements.inputPunSalary.value = def.cities.pune.salaryLakh;
+    elements.inputPunRent.value = def.cities.pune.monthlyRent;
+
+    updateScenarioCalculations();
+  }
+
+  // Shortlist View Controller
+  function renderShortlistView() {
+    const savedIds = window.GCC_STORAGE.getShortlistIds();
+    const savedCompanies = window.GCC_DATA.companies.filter(c => savedIds.includes(c.id));
+    const container = elements.shortlistCompaniesContainer;
+
+    elements.sidebarShortlistCount.textContent = savedIds.length;
+    elements.sidebarShortlistCount.classList.toggle('has-items', savedIds.length > 0);
+
+    elements.shortlistStatusHeading.textContent = `${savedCompanies.length} Saved Peer Record${savedCompanies.length === 1 ? '' : 's'}`;
+
+    if (savedCompanies.length === 0) {
+      container.innerHTML = '';
+      elements.shortlistEmptyState.style.display = 'flex';
+      elements.btnClearShortlist.style.display = 'none';
+      return;
+    }
+
+    elements.shortlistEmptyState.style.display = 'none';
+    elements.btnClearShortlist.style.display = 'inline-block';
+
+    container.innerHTML = savedCompanies.map(c => {
+      const sourceDate = c.sources[0]?.publicationDate || 'Undated';
+      return `
+        <article class="company-card" data-id="${c.id}">
+          <div>
+            <div class="company-card-header">
+              <div class="company-title-wrap">
+                <h2 class="company-name">${escapeHtml(c.name)}</h2>
+                <span class="company-parent">Global Parent: ${escapeHtml(c.parent)}</span>
+              </div>
+              <span class="badge badge-city">${escapeHtml(c.city)}</span>
+            </div>
+
+            <div class="company-badges-row">
+              <span class="badge badge-sector">${escapeHtml(c.sector)}</span>
+              <span class="badge badge-evidence">Source Verified</span>
+            </div>
+
+            <div class="company-props-list">
+              <div class="prop-row">
+                <span class="prop-key">Verified Functions:</span>
+                <span class="prop-val">${escapeHtml(c.functions)}</span>
+              </div>
+              <div class="prop-row">
+                <span class="prop-key">Established Year:</span>
+                <span class="prop-val">${escapeHtml(c.establishedDisplay)}</span>
+              </div>
+              <div class="prop-row">
+                <span class="prop-key">Primary Source Date:</span>
+                <span class="prop-val">${escapeHtml(sourceDate)}</span>
+              </div>
+            </div>
+
+            <div class="company-claim-excerpt">
+              ${escapeHtml(c.evidenceSummary)}
+            </div>
+          </div>
+
+          <div class="company-card-actions">
+            <button type="button" class="btn btn-secondary btn-sm btn-inspect-evidence" data-id="${c.id}">
+              <span>Inspect Evidence</span>
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm btn-remove-saved" data-id="${c.id}" aria-label="Remove ${escapeHtml(c.name)} from shortlist">
+              <span>Remove</span>
+            </button>
+          </div>
+        </article>
+      `;
+    }).join('');
+
+    container.querySelectorAll('.btn-inspect-evidence').forEach(btn => {
+      btn.addEventListener('click', () => {
+        openEvidenceDrawer(btn.getAttribute('data-id'), btn);
+      });
+    });
+
+    container.querySelectorAll('.btn-remove-saved').forEach(btn => {
+      btn.addEventListener('click', () => {
+        window.GCC_STORAGE.remove(btn.getAttribute('data-id'));
+      });
+    });
+  }
+
+  // Export Brief Trigger
+  function triggerExport(format) {
+    const savedIds = window.GCC_STORAGE.getShortlistIds();
+    const shortlistCompanies = window.GCC_DATA.companies.filter(c => savedIds.includes(c.id));
+    const allCompanies = window.GCC_DATA.companies;
+
+    window.GCC_EXPORTER.exportDecisionBrief({
+      shortlistCompanies,
+      allCompanies,
+      scenarioInputs: {
+        employees: state.scenario.employees,
+        sqFtPerEmployee: state.scenario.sqFtPerEmployee
+      },
+      costResults: state.costResults
+    }, format);
+  }
+
+  // Tour Modal
+  function openTourModal() {
+    state.lastFocusedElement = document.activeElement;
+    elements.tourModalBackdrop.classList.add('open');
+    elements.tourModalBackdrop.setAttribute('aria-hidden', 'false');
+    elements.btnCloseTour.focus();
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeTourModal() {
+    elements.tourModalBackdrop.classList.remove('open');
+    elements.tourModalBackdrop.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (state.lastFocusedElement && typeof state.lastFocusedElement.focus === 'function') {
+      state.lastFocusedElement.focus();
+    }
+  }
+
+  // Bind Event Listeners
+  function bindEvents() {
+    // Nav buttons
+    elements.navButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetView = btn.getAttribute('data-view');
+        switchView(targetView);
+      });
+    });
+
+    // Mobile nav toggle
+    elements.mobileNavToggle.addEventListener('click', () => {
+      const isOpen = elements.appSidebar.classList.toggle('mobile-open');
+      elements.mobileNavToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    // Search input
+    elements.exploreSearch.addEventListener('input', (e) => {
+      state.searchQuery = e.target.value;
+      elements.exploreSearchClear.style.display = state.searchQuery ? 'block' : 'none';
+      renderExploreCards();
+    });
+
+    elements.exploreSearchClear.addEventListener('click', () => {
+      elements.exploreSearch.value = '';
+      state.searchQuery = '';
+      elements.exploreSearchClear.style.display = 'none';
+      elements.exploreSearch.focus();
+      renderExploreCards();
+    });
+
+    // City & Sector Filters
+    elements.filterCity.addEventListener('change', (e) => {
+      state.filterCity = e.target.value;
+      renderExploreCards();
+    });
+
+    elements.filterSector.addEventListener('change', (e) => {
+      state.filterSector = e.target.value;
+      renderExploreCards();
+    });
+
+    elements.btnResetFilters.addEventListener('click', () => {
+      elements.exploreSearch.value = '';
+      state.searchQuery = '';
+      elements.exploreSearchClear.style.display = 'none';
+      elements.filterCity.value = 'all';
+      state.filterCity = 'all';
+      elements.filterSector.value = 'all';
+      state.filterSector = 'all';
+      renderExploreCards();
+    });
+
+    // Calculator Inputs (Real-time updates)
+    const calcInputs = [
+      elements.inputEmployees,
+      elements.inputSqft,
+      elements.inputBlrSalary,
+      elements.inputBlrRent,
+      elements.inputHydSalary,
+      elements.inputHydRent,
+      elements.inputPunSalary,
+      elements.inputPunRent
+    ];
+
+    calcInputs.forEach(input => {
+      input.addEventListener('input', updateScenarioCalculations);
+      input.addEventListener('change', updateScenarioCalculations);
+    });
+
+    elements.btnResetAssumptions.addEventListener('click', resetAssumptions);
+
+    // Shortlist actions
+    elements.btnClearShortlist.addEventListener('click', () => {
+      if (window.confirm('Clear all peer records from your shortlist?')) {
+        window.GCC_STORAGE.clearShortlist();
+      }
+    });
+
+    elements.btnGotoExplore.addEventListener('click', () => {
+      switchView('explore');
+    });
+
+    elements.btnExportMd.addEventListener('click', () => triggerExport('md'));
+    elements.btnExportTxt.addEventListener('click', () => triggerExport('txt'));
+
+    // Drawer events
+    elements.btnCloseDrawer.addEventListener('click', closeEvidenceDrawer);
+    elements.drawerSecondaryClose.addEventListener('click', closeEvidenceDrawer);
+
+    elements.drawerBackdrop.addEventListener('click', (e) => {
+      if (e.target === elements.drawerBackdrop) {
+        closeEvidenceDrawer();
+      }
+    });
+
+    elements.drawerBtnToggleShortlist.addEventListener('click', () => {
+      if (state.activeDrawerCompanyId) {
+        window.GCC_STORAGE.toggleSave(state.activeDrawerCompanyId);
+        updateDrawerShortlistButton();
+      }
+    });
+
+    // Tour modal events
+    elements.btnOpenTour.addEventListener('click', openTourModal);
+    elements.btnCloseTour.addEventListener('click', closeTourModal);
+    elements.tourModalBackdrop.addEventListener('click', (e) => {
+      if (e.target === elements.tourModalBackdrop) {
+        closeTourModal();
+      }
+    });
+    elements.btnStartGuidedTour.addEventListener('click', () => {
+      closeTourModal();
+      switchView('explore');
+      elements.exploreSearch.focus();
+    });
+
+    // Global Keyboard Listeners (Escape key handling)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' || e.key === 'Esc') {
+        if (elements.drawerBackdrop.classList.contains('open')) {
+          closeEvidenceDrawer();
+        } else if (elements.tourModalBackdrop.classList.contains('open')) {
+          closeTourModal();
+        }
+      }
+    });
+
+    // Storage subscriber for reactive updates across the entire app
+    window.GCC_STORAGE.subscribe((ids) => {
+      elements.sidebarShortlistCount.textContent = ids.length;
+      elements.sidebarShortlistCount.classList.toggle('has-items', ids.length > 0);
+      if (state.currentView === 'explore') {
+        renderExploreCards();
+      } else if (state.currentView === 'shortlist') {
+        renderShortlistView();
+      }
+      updateDrawerShortlistButton();
+    });
+  }
+
+  // Initialize
+  function init() {
+    bindEvents();
+    renderExploreCards();
+    updateScenarioCalculations();
+    renderShortlistView();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})(window, document);
+
+  </script>
+
 </body>
 </html>

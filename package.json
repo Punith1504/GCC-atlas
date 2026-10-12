@@ -2,7 +2,6 @@
   "name": "gcc-atlas",
   "version": "1.0.0",
   "description": "GCC Atlas - India Expansion Diligence Workspace for Global Mid-Market Teams",
-  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js"
